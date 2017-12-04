@@ -92,6 +92,7 @@
     <Compile Include="AddVertexForm.Designer.cs">
       <DependentUpon>AddVertexForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base\Algorithms\IDAStar.cs" />
     <Compile Include="Base\Algorithms\AStar.cs" />
     <Compile Include="Base\Algorithms\Greedy.cs" />
     <Compile Include="Base\Algorithms\IDLS.cs" />

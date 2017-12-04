@@ -22,14 +22,21 @@ namespace Search
     {
         TextGraphDescriptorHandler text_parser = new TextGraphDescriptorHandler();
         XmlGraphDescriptorHandler xml_parser = new XmlGraphDescriptorHandler();
-        ISearchAlgorithm<string>[] salgos = { new BFS<string>(), new DFS<string>(), new UFS<string>(), new IDLS<string>(), new AStar<string>(), new Greedy<string>() };
+        ISearchAlgorithm<string>[] salgos = { new BFS<string>(),
+            new DFS<string>(),
+            new UFS<string>(),
+            new IDLS<string>(),
+            new AStar<string>(),
+            new Greedy<string>(),
+            new IDAStar<string>(),
+        };
         public Form1()
         {
             InitializeComponent();
             LoadSearchAlgorithms();
             ResetGraph();
         }
-#region Drag and drop
+        #region Drag and drop
         private void Form1_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -202,6 +209,8 @@ namespace Search
                     _gArea.ResetNodesColor();
                     if(selected_algorithm is IDLS<string>)
                         tracetxt.AppendText("New DLS Iteration Depth="+sender.ToString());
+                    else if (selected_algorithm is IDAStar<string>)
+                        tracetxt.AppendText("New IDA* Iteration Depth=" + sender.ToString());
                 }));
 
                 // set event handlers
@@ -246,8 +255,11 @@ namespace Search
         void TracePath(SearchResult<string> sr)
         {
             tracetxt.AppendText("Path: " + Environment.NewLine);
-            foreach (var edge in sr.Path)
-                tracetxt.AppendText($"{edge.Source} -> {edge.Target} " + Environment.NewLine);
+            if(sr.Path.Count() > 0)
+                foreach (var edge in sr.Path)
+                    tracetxt.AppendText($"{edge.Source} -> {edge.Target} " + Environment.NewLine);
+            else tracetxt.AppendText($"{sr.Start} " + Environment.NewLine);
+
         }
         #endregion
 

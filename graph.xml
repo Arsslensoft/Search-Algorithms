@@ -1,0 +1,12 @@
+﻿<graph>
+ 
+  <node key="A" heuristic="1" />
+  <node key="B" heuristic="2" />
+  <node key="C"  />
+  <node key="D" />
+
+  <edge source="A" target="B" weight="1" />
+  <edge source="B" target="C" weight="2" />
+  <edge source="C" target="D" weight="3" />
+  
+</graph>

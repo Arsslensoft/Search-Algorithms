@@ -227,11 +227,12 @@ namespace Search
         }
         Thread simulation_thread;
         private ISearchAlgorithm<string> selected_algorithm;
+        Stopwatch sw = new Stopwatch();
         public void RunSimulation()
         {
             try
             {
-           
+              
                 this.Invoke(new Action(delegate
                 {
                     _gArea.ResetNodesColor();
@@ -251,6 +252,7 @@ namespace Search
                 // set event handlers
                 simulation_thread = new Thread(new ThreadStart(delegate
                 {
+                    sw.Start();
                     try
                     {
                         selected_algorithm.Initialize();
@@ -272,15 +274,19 @@ namespace Search
                     }
                     catch (Exception ex)
                     {
-                        MessageBoxEx.Show(this, ex.Message, "Simulation Process", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                        MessageBoxEx.Show(this, ex.Message, "Simulation Process", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                     }
-
+                    sw.Stop();
+                    this.Invoke(new Action(delegate
+                    {
+                        tracetxt.AppendText("Elapsed time: "+ sw.Elapsed);
+                    }));
                 }));
                 simulation_thread.Start();
 
             }catch(Exception ex)
             {
-                MessageBoxEx.Show(this, ex.Message, "Simulation Execution", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                MessageBoxEx.Show(this, ex.Message, "Simulation Execution", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
 
@@ -372,7 +378,7 @@ namespace Search
                         {
                             MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Process",
                                 System.Windows.Forms.MessageBoxButtons.OK,
-                                System.Windows.Forms.MessageBoxIcon.Information);
+                                System.Windows.Forms.MessageBoxIcon.Error);
                         }
                         this.Invoke(new Action(delegate
                         {
@@ -394,7 +400,7 @@ namespace Search
             }
             catch (Exception ex)
             {
-                MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Execution", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+                MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Execution", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
 
@@ -570,10 +576,15 @@ namespace Search
         }
         void DumpToReport()
         {
-            SearchStep<string>.OnSimulationRequired += SimulateStep;
-            benchmark_report_printer = new PDFReport();
-            benchmark_report_printer.SaveReport(System.Windows.Forms.Application.StartupPath + @"\Report.pdf", benchmarks, initialGraph);
-            SearchStep<string>.OnSimulationRequired -= SimulateStep;
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                SearchStep<string>.OnSimulationRequired += SimulateStep;
+                benchmark_report_printer = new PDFReport();
+                benchmark_report_printer.SaveReport(sfd.FileName,
+                    benchmarks, initialGraph);
+                SearchStep<string>.OnSimulationRequired -= SimulateStep;
+            }
+
         }
         #endregion
 

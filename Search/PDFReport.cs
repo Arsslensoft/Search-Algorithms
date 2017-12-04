@@ -31,7 +31,8 @@ namespace Search
             doc.Add(logo);
             doc.Add(new iTextSharp.text.Chunk(line));
             // add front page
-            doc.Add(new Paragraph(new iTextSharp.text.Chunk("GraphSEA - Graph search algorithms benchmark report", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 72, iTextSharp.text.Font.BOLD, new iTextSharp.text.BaseColor(26, 188, 156)))));
+            doc.Add(new Paragraph(new iTextSharp.text.Chunk("GraphSEA", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 72, iTextSharp.text.Font.BOLD, new iTextSharp.text.BaseColor(26, 188, 156)))));
+            doc.Add(new Paragraph(new iTextSharp.text.Chunk("Graph Search Algorithms Benchmark Report", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 36, iTextSharp.text.Font.BOLD, iTextSharp.text.BaseColor.BLACK))));
 
         }
 

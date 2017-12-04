@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.metroShell1 = new DevComponents.DotNetBar.Metro.MetroShell();
             this.metroAppButton1 = new DevComponents.DotNetBar.Metro.MetroAppButton();
             this.create_graph = new DevComponents.DotNetBar.ButtonItem();
@@ -43,6 +44,7 @@
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.postdelay = new DevComponents.Editors.IntegerInput();
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
@@ -61,7 +63,7 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd_trace = new System.Windows.Forms.SaveFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.rfd = new System.Windows.Forms.SaveFileDialog();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
@@ -281,6 +283,19 @@
             this.superTabControlPanel2.Size = new System.Drawing.Size(311, 418);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonX2.Location = new System.Drawing.Point(0, 348);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(311, 36);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 14;
+            this.buttonX2.Text = "Benchmark All Algorithms";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
             // buttonX1
             // 
@@ -520,18 +535,9 @@
             // 
             this.sfd.Filter = "Text Files|*.txt|Xml Files|*.xml";
             // 
-            // buttonX2
+            // rfd
             // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonX2.Location = new System.Drawing.Point(0, 348);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(311, 36);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 14;
-            this.buttonX2.Text = "Benchmark All Algorithms";
-            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
+            this.rfd.Filter = "PDF Files|*.pdf";
             // 
             // Form1
             // 
@@ -543,6 +549,7 @@
             this.Controls.Add(this.panelEx2);
             this.Controls.Add(this.panelEx1);
             this.Controls.Add(this.metroShell1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Search Algorithms Demo";
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
@@ -593,6 +600,7 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem1;
         private System.Windows.Forms.SaveFileDialog sfd;
         private DevComponents.DotNetBar.ButtonX buttonX2;
+        private System.Windows.Forms.SaveFileDialog rfd;
     }
 }
 

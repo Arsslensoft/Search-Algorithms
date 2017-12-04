@@ -42,8 +42,6 @@
             this.tracetxt = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
-            this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
-            this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.postdelay = new DevComponents.Editors.IntegerInput();
@@ -215,9 +213,9 @@
             this.panelEx2.Controls.Add(this.superTabControl1);
             this.panelEx2.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelEx2.Location = new System.Drawing.Point(838, 51);
+            this.panelEx2.Location = new System.Drawing.Point(775, 51);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(248, 441);
+            this.panelEx2.Size = new System.Drawing.Size(311, 441);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -244,7 +242,6 @@
             this.superTabControl1.ControlBox.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.superTabControl1.ControlBox.MenuBox,
             this.superTabControl1.ControlBox.CloseBox});
-            this.superTabControl1.Controls.Add(this.superTabControlPanel1);
             this.superTabControl1.Controls.Add(this.superTabControlPanel2);
             this.superTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControl1.ForeColor = System.Drawing.Color.Black;
@@ -253,30 +250,13 @@
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.superTabControl1.SelectedTabIndex = 0;
-            this.superTabControl1.Size = new System.Drawing.Size(248, 441);
+            this.superTabControl1.Size = new System.Drawing.Size(311, 441);
             this.superTabControl1.TabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 0;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.superTabItem1,
             this.superTabItem2});
             this.superTabControl1.TabStyle = DevComponents.DotNetBar.eSuperTabStyle.Office2010BackstageBlue;
             this.superTabControl1.Text = "superTabControl1";
-            // 
-            // superTabControlPanel1
-            // 
-            this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.superTabControlPanel1.Location = new System.Drawing.Point(0, 23);
-            this.superTabControlPanel1.Name = "superTabControlPanel1";
-            this.superTabControlPanel1.Size = new System.Drawing.Size(248, 418);
-            this.superTabControlPanel1.TabIndex = 1;
-            this.superTabControlPanel1.TabItem = this.superTabItem1;
-            // 
-            // superTabItem1
-            // 
-            this.superTabItem1.AttachedControl = this.superTabControlPanel1;
-            this.superTabItem1.GlobalItem = false;
-            this.superTabItem1.Name = "superTabItem1";
-            this.superTabItem1.Text = "Design";
             // 
             // superTabControlPanel2
             // 
@@ -296,7 +276,7 @@
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControlPanel2.Location = new System.Drawing.Point(0, 23);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(248, 418);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 418);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
@@ -307,7 +287,7 @@
             this.buttonX1.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonX1.Location = new System.Drawing.Point(0, 312);
             this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(248, 53);
+            this.buttonX1.Size = new System.Drawing.Size(311, 53);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 13;
             this.buttonX1.Text = "Run";
@@ -327,9 +307,10 @@
             this.postdelay.Location = new System.Drawing.Point(0, 292);
             this.postdelay.Name = "postdelay";
             this.postdelay.ShowUpDown = true;
-            this.postdelay.Size = new System.Drawing.Size(248, 20);
+            this.postdelay.Size = new System.Drawing.Size(311, 20);
             this.postdelay.TabIndex = 12;
-            this.postdelay.Value = 1000;
+            this.postdelay.UseWaitCursor = true;
+            this.postdelay.Value = 400;
             // 
             // labelX6
             // 
@@ -343,7 +324,7 @@
             this.labelX6.Location = new System.Drawing.Point(0, 260);
             this.labelX6.Name = "labelX6";
             this.labelX6.SingleLineColor = System.Drawing.Color.Transparent;
-            this.labelX6.Size = new System.Drawing.Size(248, 32);
+            this.labelX6.Size = new System.Drawing.Size(311, 32);
             this.labelX6.TabIndex = 11;
             this.labelX6.Text = "Node Post-Visit Delay";
             // 
@@ -361,9 +342,9 @@
             this.predelay.Location = new System.Drawing.Point(0, 240);
             this.predelay.Name = "predelay";
             this.predelay.ShowUpDown = true;
-            this.predelay.Size = new System.Drawing.Size(248, 20);
+            this.predelay.Size = new System.Drawing.Size(311, 20);
             this.predelay.TabIndex = 10;
-            this.predelay.Value = 1000;
+            this.predelay.Value = 400;
             // 
             // labelX5
             // 
@@ -377,7 +358,7 @@
             this.labelX5.Location = new System.Drawing.Point(0, 208);
             this.labelX5.Name = "labelX5";
             this.labelX5.SingleLineColor = System.Drawing.Color.Transparent;
-            this.labelX5.Size = new System.Drawing.Size(248, 32);
+            this.labelX5.Size = new System.Drawing.Size(311, 32);
             this.labelX5.TabIndex = 9;
             this.labelX5.Text = "Node Pre-Visit Delay";
             // 
@@ -395,9 +376,9 @@
             this.delay.Location = new System.Drawing.Point(0, 188);
             this.delay.Name = "delay";
             this.delay.ShowUpDown = true;
-            this.delay.Size = new System.Drawing.Size(248, 20);
+            this.delay.Size = new System.Drawing.Size(311, 20);
             this.delay.TabIndex = 8;
-            this.delay.Value = 1000;
+            this.delay.Value = 400;
             // 
             // labelX4
             // 
@@ -411,7 +392,7 @@
             this.labelX4.Location = new System.Drawing.Point(0, 156);
             this.labelX4.Name = "labelX4";
             this.labelX4.SingleLineColor = System.Drawing.Color.Transparent;
-            this.labelX4.Size = new System.Drawing.Size(248, 32);
+            this.labelX4.Size = new System.Drawing.Size(311, 32);
             this.labelX4.TabIndex = 7;
             this.labelX4.Text = "Node Visit Delay";
             // 
@@ -425,7 +406,7 @@
             this.goal_node.ItemHeight = 14;
             this.goal_node.Location = new System.Drawing.Point(0, 136);
             this.goal_node.Name = "goal_node";
-            this.goal_node.Size = new System.Drawing.Size(248, 20);
+            this.goal_node.Size = new System.Drawing.Size(311, 20);
             this.goal_node.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.goal_node.TabIndex = 6;
             // 
@@ -441,7 +422,7 @@
             this.labelX3.Location = new System.Drawing.Point(0, 104);
             this.labelX3.Name = "labelX3";
             this.labelX3.SingleLineColor = System.Drawing.Color.Transparent;
-            this.labelX3.Size = new System.Drawing.Size(248, 32);
+            this.labelX3.Size = new System.Drawing.Size(311, 32);
             this.labelX3.TabIndex = 5;
             this.labelX3.Text = "Final State (Node)";
             // 
@@ -455,7 +436,7 @@
             this.start_node.ItemHeight = 14;
             this.start_node.Location = new System.Drawing.Point(0, 84);
             this.start_node.Name = "start_node";
-            this.start_node.Size = new System.Drawing.Size(248, 20);
+            this.start_node.Size = new System.Drawing.Size(311, 20);
             this.start_node.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.start_node.TabIndex = 4;
             // 
@@ -471,7 +452,7 @@
             this.labelX2.Location = new System.Drawing.Point(0, 52);
             this.labelX2.Name = "labelX2";
             this.labelX2.SingleLineColor = System.Drawing.Color.Transparent;
-            this.labelX2.Size = new System.Drawing.Size(248, 32);
+            this.labelX2.Size = new System.Drawing.Size(311, 32);
             this.labelX2.TabIndex = 3;
             this.labelX2.Text = "Initial State (Node)";
             // 
@@ -485,7 +466,7 @@
             this.algorithms.ItemHeight = 14;
             this.algorithms.Location = new System.Drawing.Point(0, 32);
             this.algorithms.Name = "algorithms";
-            this.algorithms.Size = new System.Drawing.Size(248, 20);
+            this.algorithms.Size = new System.Drawing.Size(311, 20);
             this.algorithms.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.algorithms.TabIndex = 1;
             // 
@@ -501,7 +482,7 @@
             this.labelX1.Location = new System.Drawing.Point(0, 0);
             this.labelX1.Name = "labelX1";
             this.labelX1.SingleLineColor = System.Drawing.Color.Transparent;
-            this.labelX1.Size = new System.Drawing.Size(248, 32);
+            this.labelX1.Size = new System.Drawing.Size(311, 32);
             this.labelX1.TabIndex = 0;
             this.labelX1.Text = "Search Algorithm";
             // 
@@ -519,7 +500,7 @@
             this.wpfHost.ForeColor = System.Drawing.Color.Black;
             this.wpfHost.Location = new System.Drawing.Point(1, 51);
             this.wpfHost.Name = "wpfHost";
-            this.wpfHost.Size = new System.Drawing.Size(837, 441);
+            this.wpfHost.Size = new System.Drawing.Size(774, 441);
             this.wpfHost.TabIndex = 10;
             this.wpfHost.Text = "elementHost1";
             this.wpfHost.Child = null;
@@ -576,8 +557,6 @@
         private DevComponents.DotNetBar.SuperTabControl superTabControl1;
         private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel2;
         private DevComponents.DotNetBar.SuperTabItem superTabItem2;
-        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel1;
-        private DevComponents.DotNetBar.SuperTabItem superTabItem1;
         private System.Windows.Forms.Integration.ElementHost wpfHost;
         private System.Windows.Forms.OpenFileDialog ofd;
         private DevComponents.DotNetBar.LabelX labelX1;

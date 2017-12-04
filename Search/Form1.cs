@@ -14,6 +14,7 @@ using System.Threading;
 using System.Windows.Media;
 using System.IO;
 using System.Linq;
+using Search.Base.Algorithms;
 
 namespace Search
 {
@@ -21,7 +22,7 @@ namespace Search
     {
         TextGraphDescriptorHandler text_parser = new TextGraphDescriptorHandler();
         XmlGraphDescriptorHandler xml_parser = new XmlGraphDescriptorHandler();
-        ISearchAlgorithm<string>[] salgos = { new BFS<string>() };
+        ISearchAlgorithm<string>[] salgos = { new BFS<string>(), new DFS<string>(), new UFS<string>(), new IDLS<string>(), new AStar<string>(), new Greedy<string>() };
         public Form1()
         {
             InitializeComponent();
@@ -196,11 +197,19 @@ namespace Search
                 Node<string> initial = (start_node.SelectedItem as ComboBoxItem).Tag as Node<string>;
                 Node<string> final = (goal_node.SelectedItem as ComboBoxItem).Tag as Node<string>;
                 selected_algorithm.OnResultFound += Selected_algorithm_OnResultFound;
+                selected_algorithm.OnResetRequired += (sender, args) => this.Invoke(new Action(delegate
+                {
+                    _gArea.ResetNodesColor();
+                    if(selected_algorithm is IDLS<string>)
+                        tracetxt.AppendText("New DLS Iteration Depth="+sender.ToString());
+                }));
+
                 // set event handlers
                 simulation_thread = new Thread(new ThreadStart(delegate
                 {
                     try
                     {
+                        selected_algorithm.Initialize();
                         var sr = selected_algorithm.Search(initial, final.Key);
                         this.Invoke(new Action(delegate
                         {
@@ -242,6 +251,7 @@ namespace Search
         }
         #endregion
 
+        #region UI Event Handlers
         private void buttonX1_Click(object sender, EventArgs e)
         {
             if (simulation_thread == null)
@@ -329,5 +339,6 @@ namespace Search
                 else text_parser.Save(nodes, edges, sfd.FileName);
             }
         }
+    #endregion 
     }
 }

@@ -7,8 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Search", "Search\Search.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{E66195A8-A01B-4F11-9504-341F3172C0F0}"
 	ProjectSection(SolutionItems) = preProject
+		astar_graph.txt = astar_graph.txt
 		graph.txt = graph.txt
 		graph.xml = graph.xml
+		greedy.txt = greedy.txt
 	EndProjectSection
 EndProject
 Global

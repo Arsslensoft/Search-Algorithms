@@ -28,8 +28,8 @@ namespace Search.Parser
             string[] lines = File.ReadAllLines(file);
             ParserResults<string> result = new ParserResults<string>();
             Dictionary<string, Node<string>> node_cache = new Dictionary<string, Node<string>>();
-            string edge_pattern = @"(?<source>[a-zA-Z0-9]+)\-\>(?<target>[a-zA-Z0-9]+)(?<weight>,\d+)?";
-            string node_pattern = @"(?<node>[a-zA-Z0-9]+)(?<heuristic>,\d+)?";
+            string edge_pattern = @"(?<source>[a-zA-Z0-9]+)\-\>(?<target>[a-zA-Z0-9]+)(?<weight>,(\d+[.])?\d+)?";
+            string node_pattern = @"(?<node>[a-zA-Z0-9]+)(?<heuristic>,(\d+[.])?\d+)?";
             foreach (var line in lines)
             {
                 var m = Regex.Match(line, node_pattern);

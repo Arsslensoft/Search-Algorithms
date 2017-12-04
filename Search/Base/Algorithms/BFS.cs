@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Search.Base
+namespace Search.Base.Algorithms
 {
     public class BFS<K> : ISearchAlgorithm<K>
              where K : class, IComparable<K>
     {
+        public event EventHandler OnResetRequired;
         public string Name => "Breadth-first search";
-        int delay;
+
 
         public event NodeVisitEventHandler<K> OnResultFound;
 
-        public int Delay { get => delay; set => delay = value; }
 
+        public void Initialize()
+        {
+            
+        }
         
         void ConstructPath(Dictionary<INode<K>, IEdge<K>> meta, INode<K> state, SearchResult<K> sr)
         {
@@ -71,6 +75,11 @@ namespace Search.Base
                 
             }
             return new SearchResult<K>(root, null) ;
+        }
+
+        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
+        {
+            throw  new NotImplementedException();
         }
     }
 }

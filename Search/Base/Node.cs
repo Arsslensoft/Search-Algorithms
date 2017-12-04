@@ -18,6 +18,7 @@ namespace Search.Base
         /// Some string property for example purposes
         /// </summary>
         public string Text { get => Key.ToString(); }
+
         public override string ToString()
         {
             return Text;
@@ -62,6 +63,7 @@ namespace Search.Base
             this.key = key;
             this.Heuristic = heuristic;
             edges = new List<IEdge<K>>();
+
         }
     }
 }

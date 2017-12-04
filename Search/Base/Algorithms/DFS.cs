@@ -11,7 +11,7 @@ namespace Search.Base.Algorithms
     {
         public event EventHandler OnResetRequired;
         public string Name => "Depth-first search";
-
+        public string Description => "Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures. One starts at the root (selecting some arbitrary node as the root in the case of a graph) and explores as far as possible along each branch before backtracking.";
         public event NodeVisitEventHandler<K> OnResultFound;
 
   
@@ -56,10 +56,7 @@ namespace Search.Base.Algorithms
 
         }
 
-        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 
 }

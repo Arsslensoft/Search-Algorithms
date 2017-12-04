@@ -14,7 +14,7 @@ namespace Search.Base.Algorithms
 
         public event EventHandler OnResetRequired;
         public event NodeVisitEventHandler<K> OnResultFound;
-
+        public string Description => "If all the edges in the search graph do not have the same cost then breadth-first search generalizes to uniform-cost search. Instead of expanding nodes in order of their depth from the root, uniform-cost search expands nodes in order of their cost from the root. At each step, the next step n to be expanded is one whose cost g(n) is lowest where g(n) is the sum of the edge costs from the root to node n. The nodes are stored in a priority queue. This algorithm is also known as Dijkstra’s single-source shortest algorithm.";
 
         public void Initialize()
         {
@@ -79,9 +79,6 @@ namespace Search.Base.Algorithms
             return new SearchResult<K>(root, null);
         }
 
-        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
-        {
-            throw new NotImplementedException();
-        }
+ 
     }
 }

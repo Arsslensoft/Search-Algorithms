@@ -25,17 +25,49 @@ namespace Search
 
         }
 
+        private Node<K> start, goal;
+        public void SetInitialGoal(Node<K> start, Node<K> goal)
+        {
+            this.start = start;
+            this.goal = goal;
+
+               vertices[start].BorderBrush = Brushes.Gold;
+            vertices[start].UpdateLayout();
+
+            vertices[goal].BorderBrush = Brushes.Crimson;
+            vertices[goal].UpdateLayout();
+        }
+        public void ResetInitialGoal()
+        {
+            if (start != null)
+            {
+                vertices[start].BorderBrush = Brushes.Black;
+                vertices[start].UpdateLayout();
+            }
+            if (goal != null)
+            {
+                vertices[goal].BorderBrush = Brushes.Black;
+                vertices[goal].UpdateLayout();
+            }
+        }
         public void ColorizeNode(Node<K> node, Brush color)
         {
             vertices[node].Background = color;
+            vertices[node].UpdateLayout();
         }
         public void ResetNodesColor()
         {
             foreach (var v in GetAllVertexControls())
-                v.Background = new SolidColorBrush(Color.FromRgb(227,227,227));
+            {
+                v.Background = new SolidColorBrush(Color.FromRgb(227, 227, 227));
+                v.UpdateLayout();
+            }
 
             foreach (var e in changed)
+            {
                 e.Foreground = Brushes.Black;
+                e.UpdateLayout();
+            }
 
             changed.Clear();
         }
@@ -49,6 +81,7 @@ namespace Search
                     {
                         e.Foreground = color;
                         changed.Add(e);
+                        e.UpdateLayout();
                     }
 
             }

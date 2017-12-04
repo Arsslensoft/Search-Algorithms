@@ -9,15 +9,12 @@ namespace Search.Base
             where K : class, IComparable<K>
     {
         event NodeVisitEventHandler<K> OnResultFound;
+
         event EventHandler OnResetRequired;
 
         string Name { get; }
-
+        string Description { get; }
         void Initialize();
         SearchResult<K> Search(INode<K> root, K key);
-        SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report);
-
-
-
     }
 }

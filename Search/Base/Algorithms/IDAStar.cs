@@ -13,7 +13,7 @@ namespace Search.Base.Algorithms
         public event EventHandler OnResetRequired;
         public string Name => "Iterative deepening A*";
 
-
+        public string Description => "Iterative deepening A* (IDA*) is a graph traversal and path search algorithm that can find the shortest path between a designated start node and any member of a set of goal nodes in a weighted graph. It is a variant of iterative deepening depth-first search that borrows the idea to use a heuristic function to evaluate the remaining cost to get to the goal from the A* search algorithm. Since it is a depth-first search algorithm, its memory usage is lower than in A*, but unlike ordinary iterative deepening search, it concentrates on exploring the most promising nodes and thus does not go to the same depth everywhere in the search tree. Unlike A*, IDA* does not utilize dynamic programming and therefore often ends up exploring the same nodes many times.";
         public event NodeVisitEventHandler<K> OnResultFound;
 
 
@@ -102,9 +102,5 @@ namespace Search.Base.Algorithms
             return new SearchResult<K>(root, null) ;
         }
 
-        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
-        {
-            throw  new NotImplementedException();
-        }
     }
 }

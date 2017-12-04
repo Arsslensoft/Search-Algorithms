@@ -1,5 +1,8 @@
 ﻿using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
 using GraphX.PCL.Common.Enums;
 using GraphX.PCL.Logic.Algorithms.OverlapRemoval;
 using GraphX.PCL.Logic.Models;
@@ -11,10 +14,16 @@ using Search.Base;
 using Search.Parser;
 using DevComponents.DotNetBar;
 using System.Threading;
-using System.Windows.Media;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
+using System.Windows.Forms;
+using System.Windows.Forms.Integration;
+using System.Windows.Media;
 using Search.Base.Algorithms;
+using Brushes = System.Windows.Media.Brushes;
+using System.Windows.Media.Imaging;
+using DataFormats = System.Windows.DataFormats;
 
 namespace Search
 {
@@ -150,8 +159,6 @@ namespace Search
             _zoomctrl.ZoomToFill();
             
         }
-
-       
         #endregion
 
         private void open_graph_Click(object sender, EventArgs e)
@@ -162,56 +169,84 @@ namespace Search
 
         #region Simulation
 
+
         private void N_OnVisit(INode<string> node)
         {
-            this.Invoke(new Action(delegate {
-                tracetxt.AppendText($"Visit {node}" + Environment.NewLine);
-                _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Green);
-            }));
-            
-            Thread.Sleep(delay.Value);
-        }
+            if (!benchmarking)
+            {
+                this.Invoke(new Action(delegate
+                {
+                    tracetxt.AppendText($"Visit {node}" + Environment.NewLine);
+                    _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Green);
+                }));
 
+                Thread.Sleep(delay.Value);
+            }
+            else
+                current_report.Steps.Add(new SearchStep<string>
+                {
+                    StepInformation =
+                        new KeyValuePair<INode<string>, NodeVisitAction>(node, NodeVisitAction.Visit)
+                });
+        }
         private void N_OnPreVisit(INode<string> node)
         {
-            this.Invoke(new Action(delegate {
-                tracetxt.AppendText($"PreVisit {node}" + Environment.NewLine);
-                _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Yellow);
-            }));
-            Thread.Sleep(predelay.Value);
+            if (!benchmarking)
+            {
+                this.Invoke(new Action(delegate
+                {
+                    tracetxt.AppendText($"PreVisit {node}" + Environment.NewLine);
+                    _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Yellow);
+                }));
+                Thread.Sleep(predelay.Value);
+            }
+            else
+                current_report.Steps.Add(new SearchStep<string>
+                {
+                    StepInformation =
+                        new KeyValuePair<INode<string>, NodeVisitAction>(node, NodeVisitAction.PreVisit)
+                });
         }
-
         private void N_OnPostVisit(INode<string> node)
         {
-            this.Invoke(new Action(delegate {
-                tracetxt.AppendText($"PostVisit {node}" + Environment.NewLine);
-                _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Blue);
-            }));
-            Thread.Sleep(postdelay.Value);
+            if (!benchmarking)
+            {
+                this.Invoke(new Action(delegate
+                {
+                    tracetxt.AppendText($"PostVisit {node}" + Environment.NewLine);
+                    _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Blue);
+                }));
+                Thread.Sleep(postdelay.Value);
+            }
+            else
+                current_report.Steps.Add(new SearchStep<string>
+                {
+                    StepInformation =
+                        new KeyValuePair<INode<string>, NodeVisitAction>(node, NodeVisitAction.PostVisit)
+                });
         }
         Thread simulation_thread;
-       
+        private ISearchAlgorithm<string> selected_algorithm;
         public void RunSimulation()
         {
             try
             {
+           
                 this.Invoke(new Action(delegate
                 {
                     _gArea.ResetNodesColor();
                     tracetxt.Text = "";
                 }));
-                ISearchAlgorithm<string> selected_algorithm = (algorithms.SelectedItem as ComboBoxItem).Tag as ISearchAlgorithm<string>;
+               selected_algorithm = (algorithms.SelectedItem as ComboBoxItem).Tag as ISearchAlgorithm<string>;
                 Node<string> initial = (start_node.SelectedItem as ComboBoxItem).Tag as Node<string>;
                 Node<string> final = (goal_node.SelectedItem as ComboBoxItem).Tag as Node<string>;
-                selected_algorithm.OnResultFound += Selected_algorithm_OnResultFound;
-                selected_algorithm.OnResetRequired += (sender, args) => this.Invoke(new Action(delegate
+                this.Invoke(new Action(delegate
                 {
-                    _gArea.ResetNodesColor();
-                    if(selected_algorithm is IDLS<string>)
-                        tracetxt.AppendText("New DLS Iteration Depth="+sender.ToString());
-                    else if (selected_algorithm is IDAStar<string>)
-                        tracetxt.AppendText("New IDA* Iteration Depth=" + sender.ToString());
+                    _gArea.ResetInitialGoal();
+                    _gArea.SetInitialGoal(initial,final);
                 }));
+                selected_algorithm.OnResultFound += Selected_algorithm_OnResultFound;
+                selected_algorithm.OnResetRequired += Selected_algorithm_OnResetRequired;
 
                 // set event handlers
                 simulation_thread = new Thread(new ThreadStart(delegate
@@ -222,6 +257,8 @@ namespace Search
                         var sr = selected_algorithm.Search(initial, final.Key);
                         this.Invoke(new Action(delegate
                         {
+                            selected_algorithm.OnResultFound -= Selected_algorithm_OnResultFound;
+                            selected_algorithm.OnResetRequired -= Selected_algorithm_OnResetRequired;
                             buttonX1.Text = "Run";
                             simulation_thread = null;
                             if (sr.Found)
@@ -229,6 +266,8 @@ namespace Search
                                 _gArea.ColorizePath(sr, Brushes.Red);
                                 TracePath(sr);
                             }
+                            MessageBoxEx.Show(this, "Simulation complete", "Simulation",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }));
                     }
                     catch (Exception ex)
@@ -245,12 +284,133 @@ namespace Search
             }
         }
 
+        private void Selected_algorithm_OnResetRequired(object sender, EventArgs e)
+        {
+            if(!benchmarking)
+                this.Invoke(new Action(delegate
+                 {
+                     _gArea.ResetNodesColor();
+                     if (selected_algorithm is IDLS<string>)
+                         tracetxt.AppendText("New DLS Iteration Depth=" + sender.ToString());
+                     else if (selected_algorithm is IDAStar<string>)
+                         tracetxt.AppendText("New IDA* Iteration Depth=" + sender.ToString());
+                 }));
+            else
+                current_report.Steps.Add(new SearchStep<string>
+                {
+                    StepInformation =
+                        new KeyValuePair<INode<string>, NodeVisitAction>(null, NodeVisitAction.Reset)
+                });
+        }
+
+        private bool benchmarking = false;
+        private Bitmap initialGraph;
+        private SearchReport<string> current_report;
+        private List<KeyValuePair<ISearchAlgorithm<string>, SearchReport<string>>> benchmarks = new List<KeyValuePair<ISearchAlgorithm<string>, SearchReport<string>>>();
+        public void BenchmarkSimulation()
+        {
+            try
+            {
+                benchmarking = true;
+                this.Invoke(new Action(delegate
+                {
+                    _gArea.ResetNodesColor();
+                    tracetxt.Text = "";
+                }));
+                benchmarks.Clear();
+                Node<string> initial = (start_node.SelectedItem as ComboBoxItem).Tag as Node<string>;
+                Node<string> final = (goal_node.SelectedItem as ComboBoxItem).Tag as Node<string>;
+                initialGraph = ScreenshotGraphView();
+                this.Invoke(new Action(delegate
+                {
+                    _gArea.ResetInitialGoal();
+                    _gArea.SetInitialGoal(initial, final);
+                }));
+                // set event handlers
+                simulation_thread = new Thread(new ThreadStart(delegate
+                    {
+                        try
+                        {
+                            this.Invoke(new Action(delegate
+                            {
+                                buttonX2.Enabled = false;
+                                buttonX1.Enabled = false;
+                            }));
+
+                            foreach (var selected_algorithm in salgos)
+                            {
+                           
+                                selected_algorithm.OnResultFound += Selected_algorithm_OnResultFound;
+                                selected_algorithm.OnResetRequired += Selected_algorithm_OnResetRequired;
+
+                                selected_algorithm.Initialize();
+                                current_report = new SearchReport<string>();
+                                current_report.Timer.Start();
+                                var sr = selected_algorithm.Search(initial, final.Key);
+                                benchmarks.Add(
+                                    new KeyValuePair<ISearchAlgorithm<string>, SearchReport<string>>(selected_algorithm,
+                                        current_report));
+                                current_report.Result = sr;
+                                current_report.Timer.Stop();
+                                current_report.Steps.Add(new SearchStep<string>
+                                {
+                                    StepInformation =
+                                        new KeyValuePair<INode<string>, NodeVisitAction>(null, NodeVisitAction.Reset)
+                                });
+                                current_report.ElapsedTime = current_report.Timer.Elapsed;
+                                selected_algorithm.OnResultFound -= Selected_algorithm_OnResultFound;
+                                selected_algorithm.OnResetRequired -= Selected_algorithm_OnResetRequired;
+                            }
+                            this.Invoke(new Action(delegate
+                            {
+                      
+                                simulation_thread = null;
+                                DumpToReport();
+                            }));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Process",
+                                System.Windows.Forms.MessageBoxButtons.OK,
+                                System.Windows.Forms.MessageBoxIcon.Information);
+                        }
+                        this.Invoke(new Action(delegate
+                        {
+                            buttonX2.Enabled = true;
+                            buttonX1.Enabled = true;
+                            benchmarking = false;
+                            MessageBoxEx.Show(this, "Benchmark successfully completed", "Benchmark simulation",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }));
+
+                        
+                    }));
+                    simulation_thread.Start();
+                    //simulation_thread.Join();
+              
+
+          
+
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Execution", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Information);
+            }
+        }
+
         private void Selected_algorithm_OnResultFound(INode<string> node)
         {
-            this.Invoke(new Action(delegate {
-                _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Red);
-                tracetxt.AppendText("Result found "+Environment.NewLine);
-            }));
+            if (!benchmarking)
+                this.Invoke(new Action(delegate {
+                    _gArea.ColorizeNode(node as Node<string>, System.Windows.Media.Brushes.Red);
+                    tracetxt.AppendText("Result found " + Environment.NewLine);}));
+            else
+                current_report.Steps.Add(new SearchStep<string>
+                {
+                    StepInformation =
+                        new KeyValuePair<INode<string>, NodeVisitAction>(node, NodeVisitAction.FoundResult)
+                });
+
         }
         void TracePath(SearchResult<string> sr)
         {
@@ -279,7 +439,10 @@ namespace Search
                 
             }
         }
-
+        private void buttonX2_Click(object sender, EventArgs e)
+        {
+            BenchmarkSimulation();
+        }
         private void save_report_Click(object sender, EventArgs e)
         {
             if (sfd_trace.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -351,6 +514,68 @@ namespace Search
                 else text_parser.Save(nodes, edges, sfd.FileName);
             }
         }
-    #endregion 
+        #endregion
+
+        #region  Benchmark utils
+
+        Bitmap ScreenshotGraphView()
+        {
+            _gArea.ExportAsImage(System.Windows.Forms.Application.StartupPath + @"\graph.png", ImageType.PNG, false, 150, 100);
+            Bitmap sr = null;
+            using (Stream str = File.OpenRead(System.Windows.Forms.Application.StartupPath + @"\graph.png"))
+                sr =(Bitmap)Image.FromStream(str );
+            return sr;
+        }
+
+        private PDFReport benchmark_report_printer = null;
+        Bitmap SimulateStep(KeyValuePair<INode<string>, NodeVisitAction> step)
+        {
+            if (step.Value == NodeVisitAction.PreVisit)
+            {
+                this.Invoke(new Action(delegate {
+                    _gArea.ColorizeNode(step.Key as Node<string>, System.Windows.Media.Brushes.Yellow);
+                }));
+                return ScreenshotGraphView();
+            }
+            else if (step.Value == NodeVisitAction.Visit)
+            {
+                this.Invoke(new Action(delegate {
+                    _gArea.ColorizeNode(step.Key as Node<string>, System.Windows.Media.Brushes.Green);
+                }));
+                return ScreenshotGraphView();
+            }
+           else if (step.Value == NodeVisitAction.PostVisit)
+            {
+                this.Invoke(new Action(delegate {
+                    _gArea.ColorizeNode(step.Key as Node<string>, System.Windows.Media.Brushes.Blue);
+
+                }));
+                return ScreenshotGraphView();
+            }
+            else if (step.Value == NodeVisitAction.FoundResult)
+            {
+                this.Invoke(new Action(delegate {
+                    _gArea.ColorizeNode(step.Key as Node<string>, System.Windows.Media.Brushes.Red);
+                    _gArea.ColorizePath(benchmark_report_printer.CurrentReport.Result, Brushes.Red);
+                }));
+                return ScreenshotGraphView();
+            }
+            else
+            {
+                this.Invoke(new Action(delegate {
+                    _gArea.ResetNodesColor();
+                }));
+                return ScreenshotGraphView();
+            }
+        }
+        void DumpToReport()
+        {
+            SearchStep<string>.OnSimulationRequired += SimulateStep;
+            benchmark_report_printer = new PDFReport();
+            benchmark_report_printer.SaveReport(System.Windows.Forms.Application.StartupPath + @"\Report.pdf", benchmarks, initialGraph);
+            SearchStep<string>.OnSimulationRequired -= SimulateStep;
+        }
+        #endregion
+
     }
 }

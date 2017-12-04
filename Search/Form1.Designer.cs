@@ -61,6 +61,7 @@
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.sfd_trace = new System.Windows.Forms.SaveFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
@@ -260,6 +261,7 @@
             // 
             // superTabControlPanel2
             // 
+            this.superTabControlPanel2.Controls.Add(this.buttonX2);
             this.superTabControlPanel2.Controls.Add(this.buttonX1);
             this.superTabControlPanel2.Controls.Add(this.postdelay);
             this.superTabControlPanel2.Controls.Add(this.labelX6);
@@ -287,7 +289,7 @@
             this.buttonX1.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonX1.Location = new System.Drawing.Point(0, 312);
             this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(311, 53);
+            this.buttonX1.Size = new System.Drawing.Size(311, 36);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 13;
             this.buttonX1.Text = "Run";
@@ -518,6 +520,19 @@
             // 
             this.sfd.Filter = "Text Files|*.txt|Xml Files|*.xml";
             // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonX2.Location = new System.Drawing.Point(0, 348);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(311, 36);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 14;
+            this.buttonX2.Text = "Benchmark All Algorithms";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -577,6 +592,7 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
         private DevComponents.DotNetBar.ButtonItem buttonItem1;
         private System.Windows.Forms.SaveFileDialog sfd;
+        private DevComponents.DotNetBar.ButtonX buttonX2;
     }
 }
 

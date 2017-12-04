@@ -12,6 +12,7 @@ namespace Search.Base.Algorithms
         public event EventHandler OnResetRequired;
         public string Name => "Breadth-first search";
 
+        public string Description => "Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. It starts at the tree root (or some arbitrary node of a graph, sometimes referred to as a 'search key') and explores the neighbor nodes first, before moving to the next level neighbours.";
 
         public event NodeVisitEventHandler<K> OnResultFound;
 
@@ -51,7 +52,7 @@ namespace Search.Base.Algorithms
                 visited.Add(node.Key); // mark as visited
                 node.Visit();
 
-                if (node.Key == key)
+                if (node.Key == key) // goal found
                 { 
                     node.PostVisit();
                     OnResultFound?.Invoke(node);
@@ -75,11 +76,6 @@ namespace Search.Base.Algorithms
                 
             }
             return new SearchResult<K>(root, null) ;
-        }
-
-        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
-        {
-            throw  new NotImplementedException();
         }
     }
 }

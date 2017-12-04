@@ -13,7 +13,7 @@ namespace Search.Base.Algorithms
         public event EventHandler OnResetRequired;
         public event NodeVisitEventHandler<K> OnResultFound;
 
-  
+        public string Description => "In computer science, iterative deepening search or more specifically iterative deepening depth-first search (IDS or IDDFS) is a state space/graph search strategy in which a depth-limited version of depth-first search is run repeatedly with increasing depth limits until the goal is found. IDDFS is equivalent to breadth-first search, but uses much less memory; on each iteration, it visits the nodes in the search tree in the same order as depth-first search, but the cumulative order in which nodes are first visited is effectively breadth-first.";
 
         public void Initialize()
         {
@@ -66,10 +66,7 @@ namespace Search.Base.Algorithms
 
         }
 
-        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 
 }

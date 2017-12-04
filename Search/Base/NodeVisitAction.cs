@@ -5,6 +5,7 @@
         PreVisit,
         Visit,
         PostVisit,
-        FoundResult
+        FoundResult,
+        Reset
     }
 }

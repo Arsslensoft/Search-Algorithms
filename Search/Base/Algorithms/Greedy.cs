@@ -12,7 +12,7 @@ namespace Search.Base.Algorithms
     {
         public event EventHandler OnResetRequired;
         public string Name => "Best-first search";
-
+        public string Description => "Best-first search is a search algorithm which explores a graph by expanding the most promising node chosen according to a specified rule.";
 
         public event NodeVisitEventHandler<K> OnResultFound;
 
@@ -80,9 +80,6 @@ namespace Search.Base.Algorithms
             return new SearchResult<K>(root, null);
         }
 
-        public SearchResult<K> SearchWithReport(INode<K> root, K key, SearchReport<K> report)
-        {
-            throw new NotImplementedException();
-        }
+  
     }
 }

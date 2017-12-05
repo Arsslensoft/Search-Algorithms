@@ -14,6 +14,8 @@ namespace Search.Base
 
         string Name { get; }
         string Description { get; }
+        bool Logged { get; set; }
+
         void Initialize();
         SearchResult<K> Search(INode<K> root, K key);
     }

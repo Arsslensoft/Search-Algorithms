@@ -16,7 +16,12 @@ namespace Search.Base.Algorithms
 
         public event NodeVisitEventHandler<K> OnResultFound;
 
-
+        private bool logged = false;
+        public bool Logged
+        {
+            get => logged;
+            set => logged = value;
+        }
         public void Initialize()
         {
             
@@ -66,6 +71,8 @@ namespace Search.Base.Algorithms
                     return sr;
                 }
                 // for all successors
+                if (logged)
+                    node.LogAction("Exploring successors of " + node);
                 foreach (var child in node.Edges)
                 {
                     if (!g.ContainsKey(child.Target)) g.Add(child.Target, double.PositiveInfinity); // set +infinity as default
@@ -81,12 +88,16 @@ namespace Search.Base.Algorithms
                     double tentative_gScore = g[node] + child.Cost;
                     if (g.ContainsKey(child.Target) && g[child.Target] < tentative_gScore)
                         continue; // This is not a better path.
-                  
+                    if (logged)
+                        node.LogAction("Choosing a promising path " + child.Source + " -> "+ child.Target);
+
                     // This path is the best until now. Record it!
-                    if(!cameFrom.ContainsKey(child.Target))
+                    if (!cameFrom.ContainsKey(child.Target))
                        cameFrom.Add(child.Target, child);
                     else cameFrom[child.Target] = child;
 
+                    if (logged)
+                        node.LogAction("Updating f(" + node+ ")/g(" + node + ") from  "+ f[child.Target]  + " / "+ g[child.Target]  + " to " + tentative_gScore + "/" + tentative_gScore + child.Target.Heuristic);
                     g[child.Target] = tentative_gScore;
                     f[child.Target] = tentative_gScore + child.Target.Heuristic;
                     queue.UpdatePriority(child.Target, tentative_gScore + child.Target.Heuristic); // update priority queue

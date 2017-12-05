@@ -37,7 +37,7 @@
   <ItemGroup>
     <Reference Include="DevComponents.DotNetBar2, Version=14.0.0.3, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>E:\Program Files (x86)\DotNetBar for Windows Forms\DevComponents.DotNetBar2.dll</HintPath>
+      <HintPath>D:\Work\Projects\OCT\OCT\bin\Debug\Debug\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
     <Reference Include="GraphX.PCL.Common, Version=2.3.6.0, Culture=neutral, PublicKeyToken=a6cdb671d651b60a, processorArchitecture=MSIL">
       <HintPath>..\packages\GraphX.2.3.6.0\lib\net40-client\GraphX.PCL.Common.dll</HintPath>
@@ -104,7 +104,6 @@
     <Compile Include="AddVertexForm.Designer.cs">
       <DependentUpon>AddVertexForm.cs</DependentUpon>
     </Compile>
-    <None Include="Base\Algorithms\SMAStar.cs" />
     <Compile Include="Base\Algorithms\IDAStar.cs" />
     <Compile Include="Base\Algorithms\AStar.cs" />
     <Compile Include="Base\Algorithms\GBFS.cs" />

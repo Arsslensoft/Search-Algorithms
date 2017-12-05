@@ -66,6 +66,7 @@
             this.sfd_trace = new System.Windows.Forms.SaveFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.rfd = new System.Windows.Forms.SaveFileDialog();
+            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
@@ -180,9 +181,9 @@
             this.panelEx1.Controls.Add(this.tracetxt);
             this.panelEx1.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelEx1.Location = new System.Drawing.Point(1, 509);
+            this.panelEx1.Location = new System.Drawing.Point(1, 536);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(1085, 94);
+            this.panelEx1.Size = new System.Drawing.Size(1085, 67);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -208,7 +209,7 @@
             this.tracetxt.PreventEnterBeep = true;
             this.tracetxt.ReadOnly = true;
             this.tracetxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tracetxt.Size = new System.Drawing.Size(1085, 94);
+            this.tracetxt.Size = new System.Drawing.Size(1085, 67);
             this.tracetxt.TabIndex = 0;
             // 
             // panelEx2
@@ -220,7 +221,7 @@
             this.panelEx2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEx2.Location = new System.Drawing.Point(775, 61);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(311, 448);
+            this.panelEx2.Size = new System.Drawing.Size(311, 475);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -255,7 +256,7 @@
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.superTabControl1.SelectedTabIndex = 0;
-            this.superTabControl1.Size = new System.Drawing.Size(311, 448);
+            this.superTabControl1.Size = new System.Drawing.Size(311, 475);
             this.superTabControl1.TabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 0;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -265,6 +266,7 @@
             // 
             // superTabControlPanel2
             // 
+            this.superTabControlPanel2.Controls.Add(this.checkBoxX1);
             this.superTabControlPanel2.Controls.Add(this.progressBarX1);
             this.superTabControlPanel2.Controls.Add(this.status);
             this.superTabControlPanel2.Controls.Add(this.buttonX2);
@@ -284,7 +286,7 @@
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControlPanel2.Location = new System.Drawing.Point(0, 23);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 425);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 452);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
@@ -551,7 +553,7 @@
             this.wpfHost.ForeColor = System.Drawing.Color.Black;
             this.wpfHost.Location = new System.Drawing.Point(1, 61);
             this.wpfHost.Name = "wpfHost";
-            this.wpfHost.Size = new System.Drawing.Size(774, 448);
+            this.wpfHost.Size = new System.Drawing.Size(774, 475);
             this.wpfHost.TabIndex = 10;
             this.wpfHost.Text = "elementHost1";
             this.wpfHost.Child = null;
@@ -572,6 +574,21 @@
             // rfd
             // 
             this.rfd.Filter = "PDF Files|*.pdf";
+            // 
+            // checkBoxX1
+            // 
+            this.checkBoxX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBoxX1.Location = new System.Drawing.Point(0, 418);
+            this.checkBoxX1.Name = "checkBoxX1";
+            this.checkBoxX1.Size = new System.Drawing.Size(311, 28);
+            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX1.TabIndex = 17;
+            this.checkBoxX1.Text = "Log details";
             // 
             // Form1
             // 
@@ -637,6 +654,7 @@
         private System.Windows.Forms.SaveFileDialog rfd;
         private DevComponents.DotNetBar.LabelX status;
         private DevComponents.DotNetBar.Controls.ProgressBarX progressBarX1;
+        private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
     }
 }
 

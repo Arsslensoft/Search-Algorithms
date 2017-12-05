@@ -41,8 +41,9 @@ namespace Search
         {
             doc.Add(new Paragraph(new Chunk("Results Summary", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 24, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK))));
             doc.Add(new Paragraph(new Chunk("")));
-
-           var bf = BaseFont.CreateFont(Application.StartupPath + @"\arial.ttf", BaseFont.IDENTITY_H, true);
+            doc.Add(new Paragraph(new Chunk("")));
+            doc.Add(new Paragraph(new Chunk("")));
+            var bf = BaseFont.CreateFont(Application.StartupPath + @"\arial.ttf", BaseFont.IDENTITY_H, true);
             iTextSharp.text.Font NormalFont = new iTextSharp.text.Font(bf, 12, iTextSharp.text.Font.NORMAL, iTextSharp.text.BaseColor.BLACK);
 
             PdfPTable table = new PdfPTable(2) { WidthPercentage = 100 };
@@ -65,7 +66,8 @@ namespace Search
         void WriteTableOfContent(Document doc)
         {
             doc.NewPage();
-            doc.Add(new Paragraph("Table of Contents"));
+            doc.Add(new Paragraph(new iTextSharp.text.Chunk("Table of Contents", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.COURIER, 36, iTextSharp.text.Font.BOLD, new iTextSharp.text.BaseColor(26, 188, 156)))));
+            doc.Add(new Paragraph(" "));
             Chunk dottedLine = new Chunk(new DottedLineSeparator());
             List<KeyValuePair<String, int>> entries = pageEventHelper.TableOfContent;
             foreach (var entry in entries)
@@ -175,7 +177,7 @@ namespace Search
             Chunk desc = new Chunk(algorithm.Description, new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK));
             doc.Add(new Paragraph(desc));
             // algorithm benchmark
-            Chunk time = new Chunk("The algorithm took " + report.ElapsedTime + " to find the goal.", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK));
+            Chunk time = new Chunk("The algorithm took " + report.ElapsedTime + " to find the goal.", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.BOLDITALIC, iTextSharp.text.BaseColor.BLACK));
             doc.Add(new Paragraph(time));
             // write steps
             foreach (var step in report.Steps)     

@@ -145,6 +145,7 @@ namespace Search
                 n.OnPostVisit += N_OnPostVisit;
                 n.OnPreVisit += N_OnPreVisit;
                 n.OnVisit += N_OnVisit;
+                n.OnActionVisit += N_OnActionVisit;
             }
 
             foreach (var e in res.Edges)
@@ -207,6 +208,17 @@ namespace Search
                         new KeyValuePair<INode<string>, NodeVisitAction>(node, NodeVisitAction.PreVisit)
                 });
         }
+        private void N_OnActionVisit(INode<string> node, string action)
+        {
+            if (!benchmarking)
+            {
+                this.Invoke(new Action(delegate
+                {
+                    tracetxt.AppendText(action + Environment.NewLine);
+                }));
+            }
+    
+        }
         private void N_OnPostVisit(INode<string> node)
         {
             if (!benchmarking)
@@ -245,6 +257,7 @@ namespace Search
                 {
                     _gArea.ResetInitialGoal();
                     _gArea.SetInitialGoal(initial,final);
+                    selected_algorithm.Logged = checkBoxX1.Checked;
                 }));
                 selected_algorithm.OnResultFound += Selected_algorithm_OnResultFound;
                 selected_algorithm.OnResetRequired += Selected_algorithm_OnResetRequired;
@@ -348,19 +361,27 @@ namespace Search
 
                             foreach (var selected_algorithm in salgos)
                             {
-                           
+                                this.Invoke(new Action(delegate
+                                {
+                                    selected_algorithm.Logged = false;
+                                }));
                                 selected_algorithm.OnResultFound += Selected_algorithm_OnResultFound;
                                 selected_algorithm.OnResetRequired += Selected_algorithm_OnResetRequired;
 
                                 selected_algorithm.Initialize();
                                 current_report = new SearchReport<string>();
-                                current_report.Timer.Start();
-                                var sr = selected_algorithm.Search(initial, final.Key);
-                                benchmarks.Add(
-                                    new KeyValuePair<ISearchAlgorithm<string>, SearchReport<string>>(selected_algorithm,
-                                        current_report));
-                                current_report.Result = sr;
-                                current_report.Timer.Stop();
+                                SearchResult<string> sr = null;
+                              
+                                    current_report.Timer.Start();
+                                    sr = selected_algorithm.Search(initial, final.Key);
+                                    benchmarks.Add(
+                                        new KeyValuePair<ISearchAlgorithm<string>, SearchReport<string>>(
+                                            selected_algorithm,
+                                            current_report));
+                                    current_report.Result = sr;
+                                    current_report.Timer.Stop();
+                                
+                              
                                 current_report.Steps.Add(new SearchStep<string>
                                 {
                                     StepInformation =
@@ -488,6 +509,7 @@ namespace Search
                 n.OnPostVisit += N_OnPostVisit;
                 n.OnPreVisit += N_OnPreVisit;
                 n.OnVisit += N_OnVisit;
+                n.OnActionVisit += N_OnActionVisit;
 
 
                 wpfHost.Child = GenerateWpfVisuals<string>(current_graph, ref _gArea);
@@ -495,6 +517,8 @@ namespace Search
                 _zoomctrl.ZoomToFill();
             }
         }
+
+
 
         private void add_edge_Click(object sender, EventArgs e)
         {

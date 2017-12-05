@@ -6,6 +6,7 @@
         Visit,
         PostVisit,
         FoundResult,
-        Reset
+        Reset,
+        LogAction
     }
 }

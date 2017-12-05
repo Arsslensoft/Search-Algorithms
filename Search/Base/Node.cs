@@ -41,7 +41,11 @@ namespace Search.Base
         public event NodeVisitEventHandler<K> OnPreVisit;
         public event NodeVisitEventHandler<K> OnVisit;
         public event NodeVisitEventHandler<K> OnPostVisit;
-
+        public event NodeVisitActionEventHandler<K> OnActionVisit;
+        public void LogAction(string action)
+        {
+            OnActionVisit?.Invoke(this, action);
+        }
         public void PostVisit()
         {
             OnPostVisit?.Invoke(this);

@@ -16,7 +16,12 @@ namespace Search.Base.Algorithms
 
         public event NodeVisitEventHandler<K> OnResultFound;
 
-
+        private bool logged = false;
+        public bool Logged
+        {
+            get => logged;
+            set => logged = value;
+        }
         public void Initialize()
         {
             
@@ -60,7 +65,8 @@ namespace Search.Base.Algorithms
                     ConstructPath(meta, node, sr); 
                     return sr;
                 }
-        
+                if (logged)
+                    node.LogAction("Exploring successors of " + node);
                 foreach (var child in node.Edges) // neighbors
                 {
                     if (!visited.Contains(child.Target.Key))
@@ -69,6 +75,8 @@ namespace Search.Base.Algorithms
                         {
                             meta.Add(child.Target, child);
                             queue.Enqueue(child.Target);
+                            if (logged)
+                                node.LogAction("Enqueue " + node);
                         }
                     }                  
                 }

@@ -15,7 +15,12 @@ namespace Search.Base.Algorithms
         public string Description => "Best-first search is a search algorithm which explores a graph by expanding the most promising node chosen according to a specified rule.";
 
         public event NodeVisitEventHandler<K> OnResultFound;
-
+        private bool logged = false;
+        public bool Logged
+        {
+            get => logged;
+            set => logged = value;
+        }
 
         public void Initialize()
         {
@@ -60,16 +65,21 @@ namespace Search.Base.Algorithms
                     ConstructPath(meta, node, sr);
                     return sr;
                 }
-
+                if (logged)
+                    root.LogAction("Exploring successors of " + root); // successors
                 foreach (var child in node.Edges)
                 {
                     if (!visited.Contains(child.Target.Key) && !queue.Contains(child.Target))
                     {
-                            meta.Add(child.Target, child);
+                        if (logged)
+                            root.LogAction("New node has been added to the queue " + child.Target); 
+                        meta.Add(child.Target, child);
                             queue.Enqueue(child.Target, child.Target.Heuristic);
                     }
                     else if(queue.Contains(child.Target) && queue.GetPriority(child.Target) > child.Target.Heuristic)
                     {
+                        if (logged)
+                            root.LogAction("Updating " + child.Target + " priority from " + queue.GetPriority(child.Target) + " to " + child.Target.Heuristic);
                         queue.UpdatePriority(child.Target, child.Target.Heuristic);
                         meta[child.Target] = child;
                     }

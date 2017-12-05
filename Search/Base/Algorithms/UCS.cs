@@ -16,6 +16,13 @@ namespace Search.Base.Algorithms
         public event NodeVisitEventHandler<K> OnResultFound;
         public string Description => "If all the edges in the search graph do not have the same cost then breadth-first search generalizes to uniform-cost search. Instead of expanding nodes in order of their depth from the root, uniform-cost search expands nodes in order of their cost from the root. At each step, the next step n to be expanded is one whose cost g(n) is lowest where g(n) is the sum of the edge costs from the root to node n. The nodes are stored in a priority queue. This algorithm is also known as Dijkstra’s single-source shortest algorithm.";
 
+        private bool logged = false;
+        public bool Logged
+        {
+            get => logged;
+            set => logged = value;
+        }
+
         public void Initialize()
         {
 
@@ -57,9 +64,12 @@ namespace Search.Base.Algorithms
                     node.PostVisit();
                     OnResultFound?.Invoke(node);
                     SearchResult<K> sr = new SearchResult<K>(root, node);
+                    
                     ConstructPath(meta, node, sr);
                     return sr;
                 }
+                if(logged)
+                    node.LogAction("Exploring successors of " + node);
 
                 foreach (var child in node.Edges)
                 {
@@ -68,9 +78,14 @@ namespace Search.Base.Algorithms
                             meta.Add(child.Target, child);
                             queue.Enqueue(child.Target, child.Cost + node_cost);
 
+                        if (logged)
+                            node.LogAction("Adding node  " + child.Target + " to priority queue with " + (child.Cost + node_cost));
+
                     }
-                  else if (queue.Contains(child.Target) && queue.GetPriority(child.Target) > (child.Cost + node_cost))
+                    else if (queue.Contains(child.Target) && queue.GetPriority(child.Target) > (child.Cost + node_cost))
                     {
+                        if (logged)
+                            node.LogAction("Updating priority of node  " + child.Target + " from " + queue.GetPriority(child.Target) + " to "+ (child.Cost + node_cost));
                         meta[child.Target] = child;
                         queue.UpdatePriority(child.Target, child.Cost + node_cost);
                      

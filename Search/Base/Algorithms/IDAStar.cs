@@ -12,7 +12,12 @@ namespace Search.Base.Algorithms
     {
         public event EventHandler OnResetRequired;
         public string Name => "Iterative deepening A*";
-
+        private bool logged = false;
+        public bool Logged
+        {
+            get => logged;
+            set => logged = value;
+        }
         public string Description => "Iterative deepening A* (IDA*) is a graph traversal and path search algorithm that can find the shortest path between a designated start node and any member of a set of goal nodes in a weighted graph. It is a variant of iterative deepening depth-first search that borrows the idea to use a heuristic function to evaluate the remaining cost to get to the goal from the A* search algorithm. Since it is a depth-first search algorithm, its memory usage is lower than in A*, but unlike ordinary iterative deepening search, it concentrates on exploring the most promising nodes and thus does not go to the same depth everywhere in the search tree. Unlike A*, IDA* does not utilize dynamic programming and therefore often ends up exploring the same nodes many times.";
         public event NodeVisitEventHandler<K> OnResultFound;
 
@@ -31,6 +36,8 @@ namespace Search.Base.Algorithms
             double f = g + node.Heuristic;
             if (f > threshold) // abort search and return threshHold
             {
+                if (logged)
+                    node.LogAction("Cutting off the branch bexause f is " + f + " and threshold was " + threshold);
                 node.PostVisit();
                 return f;
             } 
@@ -39,6 +46,9 @@ namespace Search.Base.Algorithms
                 return double.NegativeInfinity;
 
             double min = double.PositiveInfinity;
+            if (logged)
+                node.LogAction("Exploring successors of " + node);
+            // successors
             foreach (var edge in node.Edges)
             {
                 if (!path.Contains(edge.Target))
@@ -85,6 +95,7 @@ namespace Search.Base.Algorithms
             path.Push(root);
             while (true)
             {
+             
                 var t = DoSearch(path, key, 0, threshold);
                 if (double.IsNegativeInfinity(t)) // found
                 {
@@ -96,6 +107,8 @@ namespace Search.Base.Algorithms
 
                 if (double.IsPositiveInfinity(t)) // not found
                     break;
+                if (logged)
+                    root.LogAction("Updating the threshold from " + threshold + " to " +t); 
                 threshold = t;
                 OnResetRequired?.Invoke(t, EventArgs.Empty);
             }

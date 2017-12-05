@@ -45,7 +45,7 @@ namespace Search.Base.Algorithms
                 {
                     path.Push(edge.Target);
                     var t = DoSearch(path, key, g + edge.Cost, threshold);
-                    if(t == double.NegativeInfinity)  // goal was found
+                    if(double.IsNegativeInfinity(t))  // goal was found
                         return double.NegativeInfinity;
                     else if (t < min)
                         min = t;
@@ -86,7 +86,7 @@ namespace Search.Base.Algorithms
             while (true)
             {
                 var t = DoSearch(path, key, 0, threshold);
-                if (t == double.NegativeInfinity) // found
+                if (double.IsNegativeInfinity(t)) // found
                 {
                     OnResultFound?.Invoke(path.Peek());
                     SearchResult<K> sr = new SearchResult<K>(root, path.Peek());
@@ -94,7 +94,7 @@ namespace Search.Base.Algorithms
                     return sr;
                 }
 
-                if (t == double.PositiveInfinity) // not found
+                if (double.IsPositiveInfinity(t)) // not found
                     break;
                 threshold = t;
                 OnResetRequired?.Invoke(t, EventArgs.Empty);

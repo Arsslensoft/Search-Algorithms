@@ -29,6 +29,7 @@ namespace Search.Parser
             ParserResults<string> result = new ParserResults<string>();
             Dictionary<string, Node<string>> node_cache = new Dictionary<string, Node<string>>();
             string edge_pattern = @"(?<source>[a-zA-Z0-9]+)\-\>(?<target>[a-zA-Z0-9]+)(?<weight>,(\d+[.])?\d+)?";
+            string bi_sedge_pattern = @"(?<source>[a-zA-Z0-9]+)\<\-\>(?<target>[a-zA-Z0-9]+)(?<weight>,(\d+[.])?\d+)?";
             string node_pattern = @"(?<node>[a-zA-Z0-9]+)(?<heuristic>,(\d+[.])?\d+)?";
             foreach (var line in lines)
             {
@@ -54,6 +55,21 @@ namespace Search.Parser
 
                     double weight = !string.IsNullOrEmpty(m.Groups["weight"].Value) ? double.Parse(m.Groups["weight"].Value.Remove(0, 1)) : 1;
                     result.Edges.Add(new Edge<string>(node_cache[m.Groups["source"].Value], node_cache[m.Groups["target"].Value], weight));
+
+                }
+
+                m = Regex.Match(line, bi_sedge_pattern);
+                if (m.Success) // bi-directionnal edge
+                {
+                    if (!node_cache.ContainsKey(m.Groups["source"].Value))
+                        throw new ArgumentException("Source node is not defined");
+
+                    if (!node_cache.ContainsKey(m.Groups["target"].Value))
+                        throw new ArgumentException("Target node is not defined");
+
+                    double weight = !string.IsNullOrEmpty(m.Groups["weight"].Value) ? double.Parse(m.Groups["weight"].Value.Remove(0, 1)) : 1;
+                    result.Edges.Add(new Edge<string>(node_cache[m.Groups["source"].Value], node_cache[m.Groups["target"].Value], weight));
+                    result.Edges.Add(new Edge<string>(node_cache[m.Groups["target"].Value], node_cache[m.Groups["source"].Value], weight));
 
                 }
             }

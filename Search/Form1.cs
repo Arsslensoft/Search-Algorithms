@@ -33,10 +33,10 @@ namespace Search
         XmlGraphDescriptorHandler xml_parser = new XmlGraphDescriptorHandler();
         ISearchAlgorithm<string>[] salgos = { new BFS<string>(),
             new DFS<string>(),
-            new UFS<string>(),
+            new UCS<string>(),
             new IDLS<string>(),
             new AStar<string>(),
-            new Greedy<string>(),
+            new GBFS<string>(),
             new IDAStar<string>(),
         };
         public Form1()
@@ -274,7 +274,10 @@ namespace Search
                     }
                     catch (Exception ex)
                     {
-                        MessageBoxEx.Show(this, ex.Message, "Simulation Process", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        this.Invoke(new Action(delegate
+                        {
+                            MessageBoxEx.Show(this, ex.Message, "Simulation Process", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        }));
                     }
                     sw.Stop();
                     this.Invoke(new Action(delegate
@@ -376,9 +379,13 @@ namespace Search
                         }
                         catch (Exception ex)
                         {
-                            MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Process",
-                                System.Windows.Forms.MessageBoxButtons.OK,
-                                System.Windows.Forms.MessageBoxIcon.Error);
+                            this.Invoke(new Action(delegate
+                            {
+                                MessageBoxEx.Show(this, ex.Message, "Benchmark Simulation Process",
+                                    System.Windows.Forms.MessageBoxButtons.OK,
+                                    System.Windows.Forms.MessageBoxIcon.Error);
+                            }));
+                          
                         }
                         this.Invoke(new Action(delegate
                         {
@@ -607,6 +614,6 @@ namespace Search
 
         }
         #endregion
-
+       
     }
 }

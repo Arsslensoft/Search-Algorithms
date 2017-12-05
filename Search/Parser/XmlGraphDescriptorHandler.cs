@@ -40,9 +40,21 @@ namespace Search.Parser
 
                     double weight = el.HasAttribute("weight") ? double.Parse(el.GetAttribute("weight")) : 1;
                     result.Edges.Add(new Edge<string>(node_cache[el.GetAttribute("source")], node_cache[el.GetAttribute("target")], weight));
+                }
+                // bi-directionnal edge
+                if (el.Name == "biedge")
+                {
+                    if (!el.HasAttribute("source") || !node_cache.ContainsKey(el.GetAttribute("source")))
+                        throw new ArgumentException("Source node is not defined");
+
+                    if (!el.HasAttribute("target") || !node_cache.ContainsKey(el.GetAttribute("target")))
+                        throw new ArgumentException("Target node is not defined");
+
+                    double weight = el.HasAttribute("weight") ? double.Parse(el.GetAttribute("weight")) : 1;
+                    result.Edges.Add(new Edge<string>(node_cache[el.GetAttribute("source")], node_cache[el.GetAttribute("target")], weight));
+                    result.Edges.Add(new Edge<string>(node_cache[el.GetAttribute("target")], node_cache[el.GetAttribute("source")], weight));
 
                 }
-
             }
             
             return result;

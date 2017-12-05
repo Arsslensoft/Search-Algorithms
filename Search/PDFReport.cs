@@ -153,13 +153,13 @@ namespace Search
             logo.Alignment = Element.ALIGN_CENTER;
             doc.Add(logo);
         }
-        void WriteGraph(Document doc, System.Drawing.Image bmp)
+        void WriteGraph(Document doc, System.Drawing.Image bmp, INode<string> start, INode<string> goal)
         {
             doc.Add(new Paragraph(new Chunk("The Graph", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 24, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK))));
             // add graph image
             AddImage(doc,bmp);
 
-            doc.Add(new Paragraph(new Chunk("We will perform a search for {goal} starting from {start} node.", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK))));
+            doc.Add(new Paragraph(new Chunk($"We will perform a search for {goal} starting from {start} node.", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK))));
             doc.Add(new Paragraph(new Chunk("We will use various search algorithms such as (BFS, DFS, UCS, IDLS, Greedy, A*, IDA*).", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK))));
             doc.Add(new Paragraph(new Chunk("This report will include Algorithms benchmarks and resolution steps, by illustrating each step performed by the search algorithms.", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.ITALIC, iTextSharp.text.BaseColor.BLACK))));
 
@@ -191,7 +191,7 @@ namespace Search
             doc.AddHeader("Header", "GraphSEA - Graph search algorithms benchmark report");
             WriteHeader(doc);
             doc.NewPage();
-            WriteGraph(doc, initialGraph);
+            WriteGraph(doc, initialGraph, results[0].Value.Result.Start, results[0].Value.Result.End);
             doc.NewPage();
             WriteResultSummary(doc, results);
             doc.NewPage();

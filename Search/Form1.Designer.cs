@@ -96,7 +96,7 @@
             this.metroShell1.Location = new System.Drawing.Point(1, 1);
             this.metroShell1.Name = "metroShell1";
             this.metroShell1.SettingsButtonVisible = false;
-            this.metroShell1.Size = new System.Drawing.Size(1085, 50);
+            this.metroShell1.Size = new System.Drawing.Size(1085, 60);
             this.metroShell1.SystemText.MaximizeRibbonText = "&Maximize the Ribbon";
             this.metroShell1.SystemText.MinimizeRibbonText = "Mi&nimize the Ribbon";
             this.metroShell1.SystemText.QatAddItemText = "&Add to Quick Access Toolbar";
@@ -218,9 +218,9 @@
             this.panelEx2.Controls.Add(this.superTabControl1);
             this.panelEx2.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelEx2.Location = new System.Drawing.Point(775, 51);
+            this.panelEx2.Location = new System.Drawing.Point(775, 61);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(311, 458);
+            this.panelEx2.Size = new System.Drawing.Size(311, 448);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -255,7 +255,7 @@
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.superTabControl1.SelectedTabIndex = 0;
-            this.superTabControl1.Size = new System.Drawing.Size(311, 458);
+            this.superTabControl1.Size = new System.Drawing.Size(311, 448);
             this.superTabControl1.TabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 0;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -284,7 +284,7 @@
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControlPanel2.Location = new System.Drawing.Point(0, 23);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 435);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 425);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
             // 
@@ -452,7 +452,6 @@
             this.goal_node.DisplayMember = "Text";
             this.goal_node.Dock = System.Windows.Forms.DockStyle.Top;
             this.goal_node.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.goal_node.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.goal_node.ForeColor = System.Drawing.Color.Black;
             this.goal_node.FormattingEnabled = true;
             this.goal_node.ItemHeight = 14;
@@ -483,7 +482,6 @@
             this.start_node.DisplayMember = "Text";
             this.start_node.Dock = System.Windows.Forms.DockStyle.Top;
             this.start_node.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.start_node.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.start_node.ForeColor = System.Drawing.Color.Black;
             this.start_node.FormattingEnabled = true;
             this.start_node.ItemHeight = 14;
@@ -514,7 +512,6 @@
             this.algorithms.DisplayMember = "Text";
             this.algorithms.Dock = System.Windows.Forms.DockStyle.Top;
             this.algorithms.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.algorithms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.algorithms.ForeColor = System.Drawing.Color.Black;
             this.algorithms.FormattingEnabled = true;
             this.algorithms.ItemHeight = 14;
@@ -552,9 +549,9 @@
             this.wpfHost.BackColor = System.Drawing.Color.White;
             this.wpfHost.Dock = System.Windows.Forms.DockStyle.Fill;
             this.wpfHost.ForeColor = System.Drawing.Color.Black;
-            this.wpfHost.Location = new System.Drawing.Point(1, 51);
+            this.wpfHost.Location = new System.Drawing.Point(1, 61);
             this.wpfHost.Name = "wpfHost";
-            this.wpfHost.Size = new System.Drawing.Size(774, 458);
+            this.wpfHost.Size = new System.Drawing.Size(774, 448);
             this.wpfHost.TabIndex = 10;
             this.wpfHost.Text = "elementHost1";
             this.wpfHost.Child = null;

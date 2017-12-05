@@ -46,6 +46,8 @@ namespace Search.Base.Algorithms
             Dictionary<INode<K>, IEdge<K>> cameFrom = new Dictionary<INode<K>, IEdge<K>>();
             Dictionary<INode<K>, double> g = new Dictionary<INode<K>, double>(); // g(node) from start to node
             Dictionary<INode<K>, double> f = new Dictionary<INode<K>, double>(); // f(n)
+
+            // add root node
             f.Add(root, root.Heuristic); // f(root) = 0 + h(root)
             g.Add(root, 0); // g(root) = 0
             queue.Enqueue(root, root.Heuristic); 
@@ -63,27 +65,31 @@ namespace Search.Base.Algorithms
                     ConstructPath(cameFrom, node, sr); 
                     return sr;
                 }
-        
+                // for all successors
                 foreach (var child in node.Edges)
                 {
                     if (!g.ContainsKey(child.Target)) g.Add(child.Target, double.PositiveInfinity); // set +infinity as default
                     if (!f.ContainsKey(child.Target)) f.Add(child.Target, double.PositiveInfinity); // set +infinity as default
 
-                    if (!visited.Contains(child.Target.Key) && !queue.Contains(child.Target))
-                    {
+                    if (visited.Contains(child.Target.Key))
+                        continue; // Ignore the neighbor which is already evaluated.
+                    if(!queue.Contains(child.Target))   // Discover a new node
                         queue.Enqueue(child.Target, double.PositiveInfinity);// Discover a new node, with f(node)=priority = +infinity
-                        // The distance from start to a neighbor
-                        //the "dist_between" function may vary as per the solution requirements.
-                        double tentative_gScore = g[node] + child.Cost;
-                        if(g.ContainsKey(child.Target) && g[child.Target] <= tentative_gScore) 
-                            continue;
 
-                        // This path is the best until now. Record it!
-                        cameFrom.Add(child.Target, child);
-                        g[child.Target] = tentative_gScore;
-                        f[child.Target] = tentative_gScore + child.Target.Heuristic;
-                        queue.UpdatePriority(child.Target, tentative_gScore + child.Target.Heuristic); // update priority queue
-                    }                  
+                    // The distance from start to a neighbor
+                    //the "dist_between" function may vary as per the solution requirements.
+                    double tentative_gScore = g[node] + child.Cost;
+                    if (g.ContainsKey(child.Target) && g[child.Target] < tentative_gScore)
+                        continue; // This is not a better path.
+                  
+                    // This path is the best until now. Record it!
+                    if(!cameFrom.ContainsKey(child.Target))
+                       cameFrom.Add(child.Target, child);
+                    else cameFrom[child.Target] = child;
+
+                    g[child.Target] = tentative_gScore;
+                    f[child.Target] = tentative_gScore + child.Target.Heuristic;
+                    queue.UpdatePriority(child.Target, tentative_gScore + child.Target.Heuristic); // update priority queue
                 }
                 node.PostVisit();
                 

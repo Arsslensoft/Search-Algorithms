@@ -61,7 +61,7 @@ namespace Search.Base.Algorithms
                     return sr;
                 }
         
-                foreach (var child in node.Edges)
+                foreach (var child in node.Edges) // neighbors
                 {
                     if (!visited.Contains(child.Target.Key))
                     {

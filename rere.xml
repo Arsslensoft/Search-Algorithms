@@ -1,0 +1,18 @@
+<graph>
+  <node key="A" heuristic="8" />
+  <node key="a" heuristic="4" />
+  <node key="b" heuristic="2" />
+  <node key="c" heuristic="4" />
+  <node key="d" heuristic="4.5" />
+  <node key="e" heuristic="2" />
+  <node key="F" heuristic="0" />
+  <node key="G" heuristic="0" />
+  <edge source="A" target="a" weight="1.5" />
+  <edge source="A" target="d" weight="2" />
+  <edge source="A" target="G" weight="0" />
+  <edge source="a" target="b" weight="2" />
+  <edge source="b" target="c" weight="3" />
+  <edge source="c" target="F" weight="4" />
+  <edge source="d" target="e" weight="3" />
+  <edge source="e" target="F" weight="2" />
+</graph>

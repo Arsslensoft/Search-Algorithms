@@ -1,0 +1,28 @@
+PreVisit A
+Visit A
+PreVisit a
+Visit a
+PreVisit b
+Visit b
+PreVisit c
+Visit c
+PreVisit F
+Visit F
+PostVisit F
+PostVisit c
+PostVisit b
+PostVisit a
+PreVisit d
+Visit d
+PreVisit e
+Visit e
+PostVisit e
+PostVisit d
+PreVisit G
+Visit G
+PostVisit G
+Result found 
+PostVisit A
+Path: 
+A -> G 
+Elapsed time: 00:00:30.9456039

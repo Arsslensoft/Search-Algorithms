@@ -13,6 +13,7 @@ using Image = iTextSharp.text.Image;
 using Rectangle = iTextSharp.text.Rectangle;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using DevComponents.DotNetBar.Controls;
 
 namespace Search
 {

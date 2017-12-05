@@ -44,6 +44,8 @@
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.progressBarX1 = new DevComponents.DotNetBar.Controls.ProgressBarX();
+            this.status = new DevComponents.DotNetBar.LabelX();
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.postdelay = new DevComponents.Editors.IntegerInput();
@@ -168,19 +170,19 @@
             // 
             // styleManager1
             // 
-            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
+            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.OfficeMobile2014;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.White, System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(87)))), ((int)(((byte)(154))))));
             // 
             // panelEx1
             // 
             this.panelEx1.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelEx1.Controls.Add(this.tracetxt);
             this.panelEx1.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelEx1.Location = new System.Drawing.Point(1, 492);
+            this.panelEx1.Location = new System.Drawing.Point(1, 509);
             this.panelEx1.Name = "panelEx1";
-            this.panelEx1.Size = new System.Drawing.Size(1085, 111);
+            this.panelEx1.Size = new System.Drawing.Size(1085, 94);
             this.panelEx1.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx1.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -206,19 +208,19 @@
             this.tracetxt.PreventEnterBeep = true;
             this.tracetxt.ReadOnly = true;
             this.tracetxt.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tracetxt.Size = new System.Drawing.Size(1085, 111);
+            this.tracetxt.Size = new System.Drawing.Size(1085, 94);
             this.tracetxt.TabIndex = 0;
             // 
             // panelEx2
             // 
             this.panelEx2.CanvasColor = System.Drawing.SystemColors.Control;
-            this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.panelEx2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.panelEx2.Controls.Add(this.superTabControl1);
             this.panelEx2.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelEx2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelEx2.Location = new System.Drawing.Point(775, 51);
             this.panelEx2.Name = "panelEx2";
-            this.panelEx2.Size = new System.Drawing.Size(311, 441);
+            this.panelEx2.Size = new System.Drawing.Size(311, 458);
             this.panelEx2.Style.Alignment = System.Drawing.StringAlignment.Center;
             this.panelEx2.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground;
             this.panelEx2.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine;
@@ -253,7 +255,7 @@
             this.superTabControl1.ReorderTabsEnabled = true;
             this.superTabControl1.SelectedTabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.superTabControl1.SelectedTabIndex = 0;
-            this.superTabControl1.Size = new System.Drawing.Size(311, 441);
+            this.superTabControl1.Size = new System.Drawing.Size(311, 458);
             this.superTabControl1.TabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 0;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -263,6 +265,8 @@
             // 
             // superTabControlPanel2
             // 
+            this.superTabControlPanel2.Controls.Add(this.progressBarX1);
+            this.superTabControlPanel2.Controls.Add(this.status);
             this.superTabControlPanel2.Controls.Add(this.buttonX2);
             this.superTabControlPanel2.Controls.Add(this.buttonX1);
             this.superTabControlPanel2.Controls.Add(this.postdelay);
@@ -280,19 +284,49 @@
             this.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControlPanel2.Location = new System.Drawing.Point(0, 23);
             this.superTabControlPanel2.Name = "superTabControlPanel2";
-            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 418);
+            this.superTabControlPanel2.Size = new System.Drawing.Size(311, 435);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
+            // 
+            // progressBarX1
+            // 
+            this.progressBarX1.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.progressBarX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.progressBarX1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.progressBarX1.ForeColor = System.Drawing.Color.Black;
+            this.progressBarX1.Location = new System.Drawing.Point(0, 395);
+            this.progressBarX1.Name = "progressBarX1";
+            this.progressBarX1.Size = new System.Drawing.Size(311, 23);
+            this.progressBarX1.TabIndex = 16;
+            this.progressBarX1.Text = "progressBarX1";
+            // 
+            // status
+            // 
+            this.status.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.status.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.status.Dock = System.Windows.Forms.DockStyle.Top;
+            this.status.ForeColor = System.Drawing.Color.Black;
+            this.status.Location = new System.Drawing.Point(0, 372);
+            this.status.Name = "status";
+            this.status.Size = new System.Drawing.Size(311, 23);
+            this.status.TabIndex = 15;
+            this.status.Text = "Ready";
             // 
             // buttonX2
             // 
             this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonX2.Location = new System.Drawing.Point(0, 348);
+            this.buttonX2.Location = new System.Drawing.Point(0, 342);
             this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(311, 36);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.Size = new System.Drawing.Size(311, 30);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.buttonX2.TabIndex = 14;
             this.buttonX2.Text = "Benchmark All Algorithms";
             this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
@@ -304,8 +338,8 @@
             this.buttonX1.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonX1.Location = new System.Drawing.Point(0, 312);
             this.buttonX1.Name = "buttonX1";
-            this.buttonX1.Size = new System.Drawing.Size(311, 36);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.Size = new System.Drawing.Size(311, 30);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.buttonX1.TabIndex = 13;
             this.buttonX1.Text = "Run";
             this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
@@ -418,13 +452,14 @@
             this.goal_node.DisplayMember = "Text";
             this.goal_node.Dock = System.Windows.Forms.DockStyle.Top;
             this.goal_node.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.goal_node.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.goal_node.ForeColor = System.Drawing.Color.Black;
             this.goal_node.FormattingEnabled = true;
             this.goal_node.ItemHeight = 14;
             this.goal_node.Location = new System.Drawing.Point(0, 136);
             this.goal_node.Name = "goal_node";
             this.goal_node.Size = new System.Drawing.Size(311, 20);
-            this.goal_node.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.goal_node.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.goal_node.TabIndex = 6;
             // 
             // labelX3
@@ -448,13 +483,14 @@
             this.start_node.DisplayMember = "Text";
             this.start_node.Dock = System.Windows.Forms.DockStyle.Top;
             this.start_node.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.start_node.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.start_node.ForeColor = System.Drawing.Color.Black;
             this.start_node.FormattingEnabled = true;
             this.start_node.ItemHeight = 14;
             this.start_node.Location = new System.Drawing.Point(0, 84);
             this.start_node.Name = "start_node";
             this.start_node.Size = new System.Drawing.Size(311, 20);
-            this.start_node.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.start_node.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.start_node.TabIndex = 4;
             // 
             // labelX2
@@ -478,13 +514,14 @@
             this.algorithms.DisplayMember = "Text";
             this.algorithms.Dock = System.Windows.Forms.DockStyle.Top;
             this.algorithms.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.algorithms.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.algorithms.ForeColor = System.Drawing.Color.Black;
             this.algorithms.FormattingEnabled = true;
             this.algorithms.ItemHeight = 14;
             this.algorithms.Location = new System.Drawing.Point(0, 32);
             this.algorithms.Name = "algorithms";
             this.algorithms.Size = new System.Drawing.Size(311, 20);
-            this.algorithms.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.algorithms.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.algorithms.TabIndex = 1;
             // 
             // labelX1
@@ -517,7 +554,7 @@
             this.wpfHost.ForeColor = System.Drawing.Color.Black;
             this.wpfHost.Location = new System.Drawing.Point(1, 51);
             this.wpfHost.Name = "wpfHost";
-            this.wpfHost.Size = new System.Drawing.Size(774, 441);
+            this.wpfHost.Size = new System.Drawing.Size(774, 458);
             this.wpfHost.TabIndex = 10;
             this.wpfHost.Text = "elementHost1";
             this.wpfHost.Child = null;
@@ -601,6 +638,8 @@
         private System.Windows.Forms.SaveFileDialog sfd;
         private DevComponents.DotNetBar.ButtonX buttonX2;
         private System.Windows.Forms.SaveFileDialog rfd;
+        private DevComponents.DotNetBar.LabelX status;
+        private DevComponents.DotNetBar.Controls.ProgressBarX progressBarX1;
     }
 }
 

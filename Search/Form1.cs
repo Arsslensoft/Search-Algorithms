@@ -536,6 +536,11 @@ namespace Search
         private PDFReport benchmark_report_printer = null;
         Bitmap SimulateStep(KeyValuePair<INode<string>, NodeVisitAction> step)
         {
+            this.BeginInvoke(new Action(delegate {
+                status.Text = step.ToString();
+                progressBarX1.Value += 1;
+                status.Refresh();
+            }));
             if (step.Value == NodeVisitAction.PreVisit)
             {
                 this.Invoke(new Action(delegate {
@@ -576,13 +581,28 @@ namespace Search
         }
         void DumpToReport()
         {
-            if (sfd.ShowDialog() == DialogResult.OK)
+            if (rfd.ShowDialog() == DialogResult.OK)
             {
+                this.Invoke(new Action(delegate {
+                    status.Visible = true;
+                    progressBarX1.Visible = true;
+                    status.Text = "Ready";
+                    progressBarX1.Value = 0;
+                    progressBarX1.Maximum = 0;
+                    foreach (var b in benchmarks)
+                        progressBarX1.Maximum += b.Value.Steps.Count;
+
+                }));
                 SearchStep<string>.OnSimulationRequired += SimulateStep;
                 benchmark_report_printer = new PDFReport();
-                benchmark_report_printer.SaveReport(sfd.FileName,
+                benchmark_report_printer.SaveReport(rfd.FileName,
                     benchmarks, initialGraph);
                 SearchStep<string>.OnSimulationRequired -= SimulateStep;
+                this.Invoke(new Action(delegate {
+                    status.Visible = false;
+                    progressBarX1.Visible = false;
+
+                }));
             }
 
         }

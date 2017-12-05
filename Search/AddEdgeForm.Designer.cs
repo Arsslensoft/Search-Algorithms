@@ -58,13 +58,14 @@
             this.source.DisplayMember = "Text";
             this.source.Dock = System.Windows.Forms.DockStyle.Top;
             this.source.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.source.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.source.ForeColor = System.Drawing.Color.Black;
             this.source.FormattingEnabled = true;
             this.source.ItemHeight = 14;
             this.source.Location = new System.Drawing.Point(0, 23);
             this.source.Name = "source";
             this.source.Size = new System.Drawing.Size(438, 20);
-            this.source.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.source.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.source.TabIndex = 1;
             // 
             // labelX2
@@ -87,13 +88,14 @@
             this.target.DisplayMember = "Text";
             this.target.Dock = System.Windows.Forms.DockStyle.Top;
             this.target.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.target.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.target.ForeColor = System.Drawing.Color.Black;
             this.target.FormattingEnabled = true;
             this.target.ItemHeight = 14;
             this.target.Location = new System.Drawing.Point(0, 66);
             this.target.Name = "target";
             this.target.Size = new System.Drawing.Size(438, 20);
-            this.target.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.target.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.target.TabIndex = 3;
             // 
             // buttonX1
@@ -103,18 +105,20 @@
             this.buttonX1.Location = new System.Drawing.Point(363, 143);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(75, 23);
-            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
             this.buttonX1.TabIndex = 4;
             this.buttonX1.Text = "Add";
             this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
             // 
             // labelX3
             // 
+            this.labelX3.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelX3.ForeColor = System.Drawing.Color.Black;
             this.labelX3.Location = new System.Drawing.Point(0, 86);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(438, 23);
@@ -123,6 +127,7 @@
             // 
             // doubleInput1
             // 
+            this.doubleInput1.BackColor = System.Drawing.Color.White;
             // 
             // 
             // 
@@ -130,6 +135,7 @@
             this.doubleInput1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.doubleInput1.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
             this.doubleInput1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.doubleInput1.ForeColor = System.Drawing.Color.Black;
             this.doubleInput1.Increment = 1D;
             this.doubleInput1.Location = new System.Drawing.Point(0, 109);
             this.doubleInput1.Name = "doubleInput1";
@@ -156,7 +162,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "AddEdgeForm";
+            this.Text = "Add edge";
             ((System.ComponentModel.ISupportInitialize)(this.doubleInput1)).EndInit();
             this.ResumeLayout(false);
 

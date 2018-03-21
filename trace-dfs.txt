@@ -1,0 +1,29 @@
+PreVisit A
+Visit A
+PreVisit a
+Visit a
+PreVisit b
+Visit b
+PreVisit c
+Visit c
+PreVisit F
+Visit F
+PostVisit F
+PostVisit c
+PostVisit b
+PostVisit a
+PreVisit d
+Visit d
+PreVisit e
+Visit e
+PostVisit e
+PostVisit d
+PreVisit TEST
+Visit TEST
+PostVisit TEST
+Result found 
+PostVisit A
+Path: 
+A -> TEST 
+The path cost is 8
+Elapsed time: 00:00:26.4948082

@@ -179,6 +179,10 @@ namespace Search
             // algorithm benchmark
             Chunk time = new Chunk("The algorithm took " + report.ElapsedTime + " to find the goal.", new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.BOLDITALIC, iTextSharp.text.BaseColor.BLACK));
             doc.Add(new Paragraph(time));
+
+            // path
+            time = new Chunk("The result path costs " +   algorithm.CalculateCost(report.Result), new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.TIMES_ROMAN, 12, iTextSharp.text.Font.BOLDITALIC, iTextSharp.text.BaseColor.BLACK));
+            doc.Add(new Paragraph(time));
             // write steps
             foreach (var step in report.Steps)     
                 WriteAlgorithmStep(doc, step.StepInformation, step.GraphCapture );

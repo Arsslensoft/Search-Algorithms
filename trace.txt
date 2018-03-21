@@ -1,0 +1,51 @@
+PreVisit Arad
+Visit Arad
+Exploring successors of Arad
+Choosing a promising path Arad -> Sibiu
+Updating f(Arad)/g(Arad) from  ∞ / ∞ to 140/140253
+Choosing a promising path Arad -> Timisoara
+Updating f(Arad)/g(Arad) from  ∞ / ∞ to 118/118329
+Choosing a promising path Arad -> Zerind
+Updating f(Arad)/g(Arad) from  ∞ / ∞ to 75/75374
+PostVisit Arad
+PreVisit Sibiu
+Visit Sibiu
+Exploring successors of Sibiu
+Choosing a promising path Sibiu -> Oradea
+Updating f(Sibiu)/g(Sibiu) from  ∞ / ∞ to 291/291380
+Choosing a promising path Sibiu -> RimnicuVilcea
+Updating f(Sibiu)/g(Sibiu) from  ∞ / ∞ to 220/220193
+Choosing a promising path Sibiu -> Fagaras
+Updating f(Sibiu)/g(Sibiu) from  ∞ / ∞ to 239/239176
+PostVisit Sibiu
+PreVisit RimnicuVilcea
+Visit RimnicuVilcea
+Exploring successors of RimnicuVilcea
+Choosing a promising path RimnicuVilcea -> Craiova
+Updating f(RimnicuVilcea)/g(RimnicuVilcea) from  ∞ / ∞ to 366/366160
+Choosing a promising path RimnicuVilcea -> Pitesti
+Updating f(RimnicuVilcea)/g(RimnicuVilcea) from  ∞ / ∞ to 317/317100
+PostVisit RimnicuVilcea
+PreVisit Fagaras
+Visit Fagaras
+Exploring successors of Fagaras
+Choosing a promising path Fagaras -> Bucharest
+Updating f(Fagaras)/g(Fagaras) from  ∞ / ∞ to 450/4500
+PostVisit Fagaras
+PreVisit Pitesti
+Visit Pitesti
+Exploring successors of Pitesti
+Choosing a promising path Pitesti -> Bucharest
+Updating f(Pitesti)/g(Pitesti) from  450 / 450 to 418/4180
+PostVisit Pitesti
+PreVisit Bucharest
+Visit Bucharest
+PostVisit Bucharest
+Result found 
+Path: 
+Arad -> Sibiu 
+Sibiu -> RimnicuVilcea 
+RimnicuVilcea -> Pitesti 
+Pitesti -> Bucharest 
+The path cost is 418
+Elapsed time: 00:00:44.3182198

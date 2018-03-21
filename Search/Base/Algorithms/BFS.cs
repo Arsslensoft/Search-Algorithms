@@ -85,5 +85,51 @@ namespace Search.Base.Algorithms
             }
             return new SearchResult<K>(root, null) ;
         }
+
+        public SearchResult<K> SearchClean(INode<K> root, K key)
+        {
+            Queue<INode<K>> queue = new Queue<INode<K>>();
+            List<K> visited = new List<K>();
+            Dictionary<INode<K>, IEdge<K>> meta = new Dictionary<INode<K>, IEdge<K>>();
+            queue.Enqueue(root);
+            while (queue.Any())
+            {
+                var node = queue.Dequeue();
+                visited.Add(node.Key); // mark as visited
+
+                if (node.Key == key) // goal found
+                {
+                    SearchResult<K> sr = new SearchResult<K>(root, node);
+                    ConstructPath(meta, node, sr);
+                    return sr;
+                }
+                foreach (var child in node.Edges) // neighbors
+                {
+                    if (!visited.Contains(child.Target.Key))
+                    {
+                        if (!queue.Contains(child.Target))
+                        {
+                            meta.Add(child.Target, child);
+                            queue.Enqueue(child.Target);
+                        }
+                    }
+                }
+
+
+            }
+            return new SearchResult<K>(root, null);
+        }
+        public double CalculateCost(SearchResult<K> result)
+        {
+            if (result == null || !result.Found)
+                return double.PositiveInfinity;
+            else
+            {
+                double cost = 0;
+                foreach (var edge in result.Path)
+                    cost += edge.Cost;
+                return cost;
+            }
+        }
     }
 }

@@ -1,0 +1,40 @@
+PreVisit A
+Visit A
+Exploring successors of A
+Adding node  a to priority queue with 1.5
+Adding node  d to priority queue with 2
+PostVisit A
+PreVisit a
+Visit a
+Exploring successors of a
+Adding node  b to priority queue with 3.5
+PostVisit a
+PreVisit d
+Visit d
+Exploring successors of d
+Adding node  e to priority queue with 5
+PostVisit d
+PreVisit b
+Visit b
+Exploring successors of b
+Adding node  c to priority queue with 6.5
+PostVisit b
+PreVisit e
+Visit e
+Exploring successors of e
+Adding node  F to priority queue with 7
+PostVisit e
+PreVisit c
+Visit c
+Exploring successors of c
+PostVisit c
+PreVisit F
+Visit F
+PostVisit F
+Result found 
+Path: 
+A -> d 
+d -> e 
+e -> F 
+The path cost is 7
+Elapsed time: 00:01:24.9179688

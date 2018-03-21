@@ -43,7 +43,17 @@
             this.tracetxt = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.panelEx2 = new DevComponents.DotNetBar.PanelEx();
             this.superTabControl1 = new DevComponents.DotNetBar.SuperTabControl();
+            this.superTabControlPanel1 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.edgedist = new DevComponents.Editors.IntegerInput();
+            this.labelX9 = new DevComponents.DotNetBar.LabelX();
+            this.paredge = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.ercombo = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX8 = new DevComponents.DotNetBar.LabelX();
+            this.layoutcombo = new DevComponents.DotNetBar.Controls.ComboBoxEx();
+            this.labelX7 = new DevComponents.DotNetBar.LabelX();
+            this.superTabItem1 = new DevComponents.DotNetBar.SuperTabItem();
             this.superTabControlPanel2 = new DevComponents.DotNetBar.SuperTabControlPanel();
+            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
             this.progressBarX1 = new DevComponents.DotNetBar.Controls.ProgressBarX();
             this.status = new DevComponents.DotNetBar.LabelX();
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
@@ -66,11 +76,13 @@
             this.sfd_trace = new System.Windows.Forms.SaveFileDialog();
             this.sfd = new System.Windows.Forms.SaveFileDialog();
             this.rfd = new System.Windows.Forms.SaveFileDialog();
-            this.checkBoxX1 = new DevComponents.DotNetBar.Controls.CheckBoxX();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
             this.panelEx1.SuspendLayout();
             this.panelEx2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).BeginInit();
             this.superTabControl1.SuspendLayout();
+            this.superTabControlPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edgedist)).BeginInit();
             this.superTabControlPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.postdelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.predelay)).BeginInit();
@@ -248,6 +260,7 @@
             this.superTabControl1.ControlBox.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.superTabControl1.ControlBox.MenuBox,
             this.superTabControl1.ControlBox.CloseBox});
+            this.superTabControl1.Controls.Add(this.superTabControlPanel1);
             this.superTabControl1.Controls.Add(this.superTabControlPanel2);
             this.superTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.superTabControl1.ForeColor = System.Drawing.Color.Black;
@@ -260,9 +273,148 @@
             this.superTabControl1.TabFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.superTabControl1.TabIndex = 0;
             this.superTabControl1.Tabs.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.superTabItem2});
+            this.superTabItem2,
+            this.superTabItem1});
             this.superTabControl1.TabStyle = DevComponents.DotNetBar.eSuperTabStyle.Office2010BackstageBlue;
             this.superTabControl1.Text = "superTabControl1";
+            // 
+            // superTabControlPanel1
+            // 
+            this.superTabControlPanel1.Controls.Add(this.buttonX3);
+            this.superTabControlPanel1.Controls.Add(this.edgedist);
+            this.superTabControlPanel1.Controls.Add(this.labelX9);
+            this.superTabControlPanel1.Controls.Add(this.paredge);
+            this.superTabControlPanel1.Controls.Add(this.ercombo);
+            this.superTabControlPanel1.Controls.Add(this.labelX8);
+            this.superTabControlPanel1.Controls.Add(this.layoutcombo);
+            this.superTabControlPanel1.Controls.Add(this.labelX7);
+            this.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.superTabControlPanel1.Location = new System.Drawing.Point(0, 23);
+            this.superTabControlPanel1.Name = "superTabControlPanel1";
+            this.superTabControlPanel1.Size = new System.Drawing.Size(311, 452);
+            this.superTabControlPanel1.TabIndex = 0;
+            this.superTabControlPanel1.TabItem = this.superTabItem1;
+            // 
+            // edgedist
+            // 
+            this.edgedist.BackColor = System.Drawing.Color.White;
+            // 
+            // 
+            // 
+            this.edgedist.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.edgedist.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.edgedist.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.edgedist.Dock = System.Windows.Forms.DockStyle.Top;
+            this.edgedist.ForeColor = System.Drawing.Color.Black;
+            this.edgedist.Location = new System.Drawing.Point(0, 159);
+            this.edgedist.Name = "edgedist";
+            this.edgedist.ShowUpDown = true;
+            this.edgedist.Size = new System.Drawing.Size(311, 20);
+            this.edgedist.TabIndex = 14;
+            this.edgedist.UseWaitCursor = true;
+            this.edgedist.Value = 15;
+            // 
+            // labelX9
+            // 
+            this.labelX9.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX9.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelX9.ForeColor = System.Drawing.Color.Black;
+            this.labelX9.Location = new System.Drawing.Point(0, 127);
+            this.labelX9.Name = "labelX9";
+            this.labelX9.SingleLineColor = System.Drawing.Color.Transparent;
+            this.labelX9.Size = new System.Drawing.Size(311, 32);
+            this.labelX9.TabIndex = 13;
+            this.labelX9.Text = "Edge Distance";
+            // 
+            // paredge
+            // 
+            this.paredge.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.paredge.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.paredge.Checked = true;
+            this.paredge.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.paredge.CheckValue = "Y";
+            this.paredge.Dock = System.Windows.Forms.DockStyle.Top;
+            this.paredge.ForeColor = System.Drawing.Color.Black;
+            this.paredge.Location = new System.Drawing.Point(0, 104);
+            this.paredge.Name = "paredge";
+            this.paredge.Size = new System.Drawing.Size(311, 23);
+            this.paredge.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.paredge.TabIndex = 6;
+            this.paredge.Text = "Parallel Edges";
+            // 
+            // ercombo
+            // 
+            this.ercombo.DisplayMember = "Text";
+            this.ercombo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ercombo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ercombo.ForeColor = System.Drawing.Color.Black;
+            this.ercombo.FormattingEnabled = true;
+            this.ercombo.ItemHeight = 14;
+            this.ercombo.Location = new System.Drawing.Point(0, 84);
+            this.ercombo.Name = "ercombo";
+            this.ercombo.Size = new System.Drawing.Size(311, 20);
+            this.ercombo.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.ercombo.TabIndex = 5;
+            // 
+            // labelX8
+            // 
+            this.labelX8.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelX8.ForeColor = System.Drawing.Color.Black;
+            this.labelX8.Location = new System.Drawing.Point(0, 52);
+            this.labelX8.Name = "labelX8";
+            this.labelX8.SingleLineColor = System.Drawing.Color.Transparent;
+            this.labelX8.Size = new System.Drawing.Size(311, 32);
+            this.labelX8.TabIndex = 4;
+            this.labelX8.Text = "Edge Routing Algorithm";
+            // 
+            // layoutcombo
+            // 
+            this.layoutcombo.DisplayMember = "Text";
+            this.layoutcombo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.layoutcombo.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.layoutcombo.ForeColor = System.Drawing.Color.Black;
+            this.layoutcombo.FormattingEnabled = true;
+            this.layoutcombo.ItemHeight = 14;
+            this.layoutcombo.Location = new System.Drawing.Point(0, 32);
+            this.layoutcombo.Name = "layoutcombo";
+            this.layoutcombo.Size = new System.Drawing.Size(311, 20);
+            this.layoutcombo.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeMobile2014;
+            this.layoutcombo.TabIndex = 3;
+            // 
+            // labelX7
+            // 
+            this.labelX7.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.labelX7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelX7.ForeColor = System.Drawing.Color.Black;
+            this.labelX7.Location = new System.Drawing.Point(0, 0);
+            this.labelX7.Name = "labelX7";
+            this.labelX7.SingleLineColor = System.Drawing.Color.Transparent;
+            this.labelX7.Size = new System.Drawing.Size(311, 32);
+            this.labelX7.TabIndex = 2;
+            this.labelX7.Text = "Layout Algorithm";
+            // 
+            // superTabItem1
+            // 
+            this.superTabItem1.AttachedControl = this.superTabControlPanel1;
+            this.superTabItem1.GlobalItem = false;
+            this.superTabItem1.Name = "superTabItem1";
+            this.superTabItem1.Text = "Graph Appearance";
             // 
             // superTabControlPanel2
             // 
@@ -289,6 +441,22 @@
             this.superTabControlPanel2.Size = new System.Drawing.Size(311, 452);
             this.superTabControlPanel2.TabIndex = 0;
             this.superTabControlPanel2.TabItem = this.superTabItem2;
+            // 
+            // checkBoxX1
+            // 
+            this.checkBoxX1.BackColor = System.Drawing.Color.Transparent;
+            // 
+            // 
+            // 
+            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.checkBoxX1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBoxX1.ForeColor = System.Drawing.Color.Black;
+            this.checkBoxX1.Location = new System.Drawing.Point(0, 418);
+            this.checkBoxX1.Name = "checkBoxX1";
+            this.checkBoxX1.Size = new System.Drawing.Size(311, 28);
+            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.checkBoxX1.TabIndex = 17;
+            this.checkBoxX1.Text = "Log details";
             // 
             // progressBarX1
             // 
@@ -575,20 +743,18 @@
             // 
             this.rfd.Filter = "PDF Files|*.pdf";
             // 
-            // checkBoxX1
+            // buttonX3
             // 
-            this.checkBoxX1.BackColor = System.Drawing.Color.Transparent;
-            // 
-            // 
-            // 
-            this.checkBoxX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.checkBoxX1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkBoxX1.Location = new System.Drawing.Point(0, 418);
-            this.checkBoxX1.Name = "checkBoxX1";
-            this.checkBoxX1.Size = new System.Drawing.Size(311, 28);
-            this.checkBoxX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.checkBoxX1.TabIndex = 17;
-            this.checkBoxX1.Text = "Log details";
+            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonX3.Location = new System.Drawing.Point(0, 179);
+            this.buttonX3.Name = "buttonX3";
+            this.buttonX3.Size = new System.Drawing.Size(311, 31);
+            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX3.TabIndex = 15;
+            this.buttonX3.Text = "Redraw";
+            this.buttonX3.Click += new System.EventHandler(this.buttonX3_Click);
             // 
             // Form1
             // 
@@ -609,6 +775,8 @@
             this.panelEx2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.superTabControl1)).EndInit();
             this.superTabControl1.ResumeLayout(false);
+            this.superTabControlPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.edgedist)).EndInit();
             this.superTabControlPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.postdelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.predelay)).EndInit();
@@ -655,6 +823,16 @@
         private DevComponents.DotNetBar.LabelX status;
         private DevComponents.DotNetBar.Controls.ProgressBarX progressBarX1;
         private DevComponents.DotNetBar.Controls.CheckBoxX checkBoxX1;
+        private DevComponents.DotNetBar.SuperTabControlPanel superTabControlPanel1;
+        private DevComponents.DotNetBar.SuperTabItem superTabItem1;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx layoutcombo;
+        private DevComponents.DotNetBar.LabelX labelX7;
+        private DevComponents.DotNetBar.Controls.ComboBoxEx ercombo;
+        private DevComponents.DotNetBar.LabelX labelX8;
+        private DevComponents.DotNetBar.Controls.CheckBoxX paredge;
+        private DevComponents.Editors.IntegerInput edgedist;
+        private DevComponents.DotNetBar.LabelX labelX9;
+        private DevComponents.DotNetBar.ButtonX buttonX3;
     }
 }
 

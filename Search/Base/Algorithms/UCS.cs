@@ -98,7 +98,64 @@ namespace Search.Base.Algorithms
             }
             return new SearchResult<K>(root, null);
         }
+        public SearchResult<K> SearchClean(INode<K> root, K key)
+        {
+            SimplePriorityQueue<INode<K>, double> queue = new SimplePriorityQueue<INode<K>, double>();
+            List<K> visited = new List<K>();
+            Dictionary<INode<K>, IEdge<K>> meta = new Dictionary<INode<K>, IEdge<K>>();
+            queue.Enqueue(root, 0);
+            while (queue.Any())
+            {
+                var node_cost = queue.GetPriority(queue.First);
+                var node = queue.Dequeue();
+     
+                visited.Add(node.Key); // mark as visited
+  
 
- 
+                if (node.Key == key)
+                {
+                 
+                    OnResultFound?.Invoke(node);
+                    SearchResult<K> sr = new SearchResult<K>(root, node);
+
+                    ConstructPath(meta, node, sr);
+                    return sr;
+                }
+          
+
+                foreach (var child in node.Edges)
+                {
+                    if (!visited.Contains(child.Target.Key) && !queue.Contains(child.Target))
+                    {
+                        meta.Add(child.Target, child);
+                        queue.Enqueue(child.Target, child.Cost + node_cost);
+
+                    }
+                    else if (queue.Contains(child.Target) && queue.GetPriority(child.Target) > (child.Cost + node_cost))
+                    {
+                        meta[child.Target] = child;
+                        queue.UpdatePriority(child.Target, child.Cost + node_cost);
+
+                    }
+
+
+                }
+   
+
+            }
+            return new SearchResult<K>(root, null);
+        }
+        public double CalculateCost(SearchResult<K> result)
+        {
+            if (result == null || !result.Found)
+                return double.PositiveInfinity;
+            else
+            {
+                double cost = 0;
+                foreach (var edge in result.Path)
+                    cost += edge.Cost;
+                return cost;
+            }
+        }
     }
 }

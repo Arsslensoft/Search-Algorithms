@@ -16,6 +16,7 @@ namespace Search
         List<EdgeControl> changed = new List<EdgeControl>();
         public void Generate()
         {
+           
             vertices.Clear();
             //edges.Clear();
             GenerateGraph(true);

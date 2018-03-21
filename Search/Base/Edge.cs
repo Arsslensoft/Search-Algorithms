@@ -38,7 +38,7 @@ namespace Search.Base
         public Edge()
             : base(null, null, 1)
         {
-
+            
         }
 
      

@@ -42,8 +42,29 @@ namespace Search
         public Form1()
         {
             InitializeComponent();
+            LoadDefaultGraphOptions();
             LoadSearchAlgorithms();
             ResetGraph();
+        }
+
+        void LoadDefaultGraphOptions()
+        {
+            foreach (var laname in Enum.GetValues(typeof(LayoutAlgorithmTypeEnum)))
+            {
+                var ci = new ComboBoxItem(laname.ToString(), laname.ToString());
+                ci.Tag = laname;
+                layoutcombo.Items.Add(ci);
+                layoutcombo.SelectedIndex = 0;
+            }
+
+            foreach (var laname in Enum.GetValues(typeof(EdgeRoutingAlgorithmTypeEnum)))
+            {
+                var ci = new ComboBoxItem(laname.ToString(), laname.ToString());
+                ci.Tag = laname;
+                ercombo.Items.Add(ci);
+                ercombo.SelectedIndex = 0;
+            }
+
         }
         #region Drag and drop
         private void Form1_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
@@ -83,6 +104,39 @@ namespace Search
         private ZoomControl _zoomctrl;
         BiGraphArea<string> _gArea;
         BiGraph<string> current_graph;
+
+
+        UIElement RedrawGraph(ref BiGraphArea<string> _gArea)
+        {
+            _zoomctrl = new ZoomControl();
+            ZoomControl.SetViewFinderVisibility(_zoomctrl, Visibility.Visible);
+            var logic = new GXLogicCore<Node<string>, Base.Edge<string>, BidirectionalGraph<Node<string>, Base.Edge<string>>>();
+            _gArea = new BiGraphArea<string>
+            {
+                // EnableWinFormsHostingMode = false,
+                LogicCore = logic,
+                EdgeLabelFactory = new DefaultEdgelabelFactory()
+            };
+            _gArea.ShowAllEdgesLabels(true);
+            logic.Graph = current_graph;
+            logic.DefaultLayoutAlgorithm = ((LayoutAlgorithmTypeEnum)(layoutcombo.SelectedItem as ComboBoxItem).Tag);
+            logic.DefaultLayoutAlgorithmParams = logic.AlgorithmFactory.CreateLayoutParameters(((LayoutAlgorithmTypeEnum)(layoutcombo.SelectedItem as ComboBoxItem).Tag));
+            //((LinLogLayoutParameters)logic.DefaultLayoutAlgorithmParams). = 100;
+            logic.DefaultOverlapRemovalAlgorithm = OverlapRemovalAlgorithmTypeEnum.FSA;
+            logic.DefaultOverlapRemovalAlgorithmParams = logic.AlgorithmFactory.CreateOverlapRemovalParameters(OverlapRemovalAlgorithmTypeEnum.FSA);
+            ((OverlapRemovalParameters)logic.DefaultOverlapRemovalAlgorithmParams).HorizontalGap = 50;
+            ((OverlapRemovalParameters)logic.DefaultOverlapRemovalAlgorithmParams).VerticalGap = 50;
+            logic.DefaultEdgeRoutingAlgorithm = ((EdgeRoutingAlgorithmTypeEnum)(ercombo.SelectedItem as ComboBoxItem).Tag);
+            logic.EnableParallelEdges = paredge.Checked;
+            logic.ParallelEdgeDistance = edgedist.Value;
+            logic.AsyncAlgorithmCompute = false;
+            _zoomctrl.Content = _gArea;
+            _gArea.RelayoutFinished += gArea_RelayoutFinished;
+
+            var myResourceDictionary = new ResourceDictionary { Source = new Uri("WpfTemplate\\template.xaml", UriKind.Relative) };
+            _zoomctrl.Resources.MergedDictionaries.Add(myResourceDictionary);
+            return _zoomctrl;
+        }
         private UIElement GenerateWpfVisuals<K>(BiGraph<K> graph, ref BiGraphArea<K> _gArea)
               where K : class, IComparable<K>
         {
@@ -97,14 +151,16 @@ namespace Search
             };
             _gArea.ShowAllEdgesLabels(true);
             logic.Graph = graph;
-            logic.DefaultLayoutAlgorithm = LayoutAlgorithmTypeEnum.LinLog;
-            logic.DefaultLayoutAlgorithmParams = logic.AlgorithmFactory.CreateLayoutParameters(LayoutAlgorithmTypeEnum.LinLog);
+            logic.DefaultLayoutAlgorithm = ((LayoutAlgorithmTypeEnum)(layoutcombo.SelectedItem as ComboBoxItem).Tag); 
+            logic.DefaultLayoutAlgorithmParams = logic.AlgorithmFactory.CreateLayoutParameters(((LayoutAlgorithmTypeEnum)(layoutcombo.SelectedItem as ComboBoxItem).Tag));
             //((LinLogLayoutParameters)logic.DefaultLayoutAlgorithmParams). = 100;
             logic.DefaultOverlapRemovalAlgorithm = OverlapRemovalAlgorithmTypeEnum.FSA;
             logic.DefaultOverlapRemovalAlgorithmParams = logic.AlgorithmFactory.CreateOverlapRemovalParameters(OverlapRemovalAlgorithmTypeEnum.FSA);
             ((OverlapRemovalParameters)logic.DefaultOverlapRemovalAlgorithmParams).HorizontalGap = 50;
             ((OverlapRemovalParameters)logic.DefaultOverlapRemovalAlgorithmParams).VerticalGap = 50;
-            logic.DefaultEdgeRoutingAlgorithm = EdgeRoutingAlgorithmTypeEnum.None;
+            logic.DefaultEdgeRoutingAlgorithm = ((EdgeRoutingAlgorithmTypeEnum)(ercombo.SelectedItem as ComboBoxItem).Tag);
+            logic.EnableParallelEdges = paredge.Checked;
+            logic.ParallelEdgeDistance = edgedist.Value;
             logic.AsyncAlgorithmCompute = false;
             _zoomctrl.Content = _gArea;
             _gArea.RelayoutFinished += gArea_RelayoutFinished;
@@ -281,6 +337,10 @@ namespace Search
                                 _gArea.ColorizePath(sr, Brushes.Red);
                                 TracePath(sr);
                             }
+                            this.Invoke(new Action(delegate
+                            {
+                                tracetxt.AppendText("The path cost is " + selected_algorithm.CalculateCost(sr)  + Environment.NewLine);
+                            }));
                             MessageBoxEx.Show(this, "Simulation complete", "Simulation",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }));
@@ -372,16 +432,19 @@ namespace Search
                                 current_report = new SearchReport<string>();
                                 SearchResult<string> sr = null;
                               
-                                    current_report.Timer.Start();
+                           
                                     sr = selected_algorithm.Search(initial, final.Key);
                                     benchmarks.Add(
                                         new KeyValuePair<ISearchAlgorithm<string>, SearchReport<string>>(
                                             selected_algorithm,
                                             current_report));
                                     current_report.Result = sr;
-                                    current_report.Timer.Stop();
-                                
-                              
+                                current_report.Timer.Start();
+                                selected_algorithm.SearchClean(initial, final.Key);
+                                current_report.Timer.Stop();
+
+                         
+
                                 current_report.Steps.Add(new SearchStep<string>
                                 {
                                     StepInformation =
@@ -638,6 +701,15 @@ namespace Search
 
         }
         #endregion
-       
+
+        private void buttonX3_Click(object sender, EventArgs e)
+        {
+            if (current_graph != null)
+            {
+                wpfHost.Child = RedrawGraph(ref _gArea);
+                _gArea.Generate();
+                _zoomctrl.ZoomToFill();
+            }
+        }
     }
 }

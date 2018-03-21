@@ -67,7 +67,37 @@ namespace Search.Base.Algorithms
             node.PostVisit();
             return min;
         }
+        public double DoSearchClean(Stack<INode<K>> path, K key, double g, double threshold)
+        {
+            var node = path.Peek();
+            double f = g + node.Heuristic;
+            if (f > threshold) // abort search and return threshHold
+            {
+                return f;
+            }
+            // goal found
+            if (node.Key == key)
+                return double.NegativeInfinity;
 
+            double min = double.PositiveInfinity;
+          
+            // successors
+            foreach (var edge in node.Edges)
+            {
+                if (!path.Contains(edge.Target))
+                {
+                    path.Push(edge.Target);
+                    var t = DoSearchClean(path, key, g + edge.Cost, threshold);
+                    if (double.IsNegativeInfinity(t))  // goal was found
+                        return double.NegativeInfinity;
+                    else if (t < min)
+                        min = t;
+
+                    path.Pop();
+                }
+            }
+            return min;
+        }
         void ConstructPath(SearchResult<K> result, Stack<INode<K>> path, INode<K> child = null)
         {
             if(!path.Any())
@@ -114,6 +144,39 @@ namespace Search.Base.Algorithms
             }
             return new SearchResult<K>(root, null) ;
         }
+        public SearchResult<K> SearchClean(INode<K> root, K key)
+        {
+            var threshold = root.Heuristic;
+            Stack<INode<K>> path = new Stack<INode<K>>();
+            path.Push(root);
+            while (true)
+            {
 
+                var t = DoSearchClean(path, key, 0, threshold);
+                if (double.IsNegativeInfinity(t)) // found
+                {
+                    SearchResult<K> sr = new SearchResult<K>(root, path.Peek());
+                    ConstructPath(sr, path);
+                    return sr;
+                }
+
+                if (double.IsPositiveInfinity(t)) // not found
+                    break;
+                threshold = t;
+            }
+            return new SearchResult<K>(root, null);
+        }
+        public double CalculateCost(SearchResult<K> result)
+        {
+            if (result == null || !result.Found)
+                return double.PositiveInfinity;
+            else
+            {
+                double cost = 0;
+                foreach (var edge in result.Path)
+                    cost += edge.Cost;
+                return cost;
+            }
+        }
     }
 }

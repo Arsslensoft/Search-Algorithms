@@ -18,5 +18,8 @@ namespace Search.Base
 
         void Initialize();
         SearchResult<K> Search(INode<K> root, K key);
+        SearchResult<K> SearchClean(INode<K> root, K key);
+
+        double CalculateCost(SearchResult<K> result);
     }
 }
